@@ -72,6 +72,9 @@
   .student-entry strong{display:block;font-size:13px}.student-entry small{display:block;color:var(--muted);margin-top:2px;line-height:1.35}
   .student-empty{color:#aaa;text-align:center;padding-top:18px!important}
   .student-log-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}.student-log-controls select,.student-log-controls input{max-width:230px}.student-log-summary{margin:8px 0 12px;color:var(--muted);font-size:14px}
+
+  .completed-summary{background:#eef8ef;border:1px solid #b9d9bd;border-radius:10px;padding:8px 9px;margin-bottom:7px;font-size:13px;line-height:1.45}
+  .completed-summary strong{display:block;font-size:14px;margin-bottom:2px}.completed-summary .meta{color:#5b6b5d}.completed-summary .note-line{margin-top:3px;color:#3d4a3f}
   @media (max-width:700px){
     .app{padding:12px 8px 28px} h1{font-size:22px}.week-nav{width:100%}.week-nav button{flex:1;padding:9px 7px;font-size:13px}
     .cell{min-height:116px;padding:6px}.period{width:75px}.class-title{font-size:14px} select,textarea{font-size:13px}
@@ -268,8 +271,10 @@ function renderSchedule(){
       else{
         const k=keyFor(di,pi), rec=records[k]||{task:'',student:'',status:'',note:'',updated:''};
         const done=(rec.status||'').includes('已完成')?' done':'';
+        const completedSummary=(rec.status||'').includes('已完成')&&rec.task?`<div class="completed-summary"><strong>✅ ${esc(rec.task)}</strong>${rec.student?`<div class="meta">${esc(rec.student)}</div>`:''}${rec.note?`<div class="note-line">${esc(rec.note)}</div>`:''}</div>`:'';
         html+=`<td class="cell empty-cell${done}" data-key="${k}">
-          <select class="task"><option value="">＋ 選擇這節做的事</option>${rec.task&&!options.includes(rec.task)?`<option selected value="${esc(rec.task)}">${esc(rec.task)}（已從選項移除）</option>`:''}${options.map(o=>`<option ${rec.task===o?'selected':''}>${esc(o)}</option>`).join('')}</select>
+          ${completedSummary}
+          <select class="task"><option value="">＋ 選擇這節做的事</option>${rec.task&&!options.includes(rec.task)?`<option selected value="${esc(rec.task)}">${esc(rec.task)}（已停用，歷史保留）</option>`:''}${options.map(o=>`<option ${rec.task===o?'selected':''}>${esc(o)}</option>`).join('')}</select>
           <select class="studentPick" style="margin-top:6px"><option value="">學生班級姓名（可選）</option>${CASE_STUDENTS.map(s=>`<option ${rec.student===s?'selected':''}>${esc(s)}</option>`).join('')}</select>
           <select class="status status"><option value="">進度狀態</option>${STATUS.map(s=>`<option ${rec.status===s?'selected':''}>${s}</option>`).join('')}</select>
           <textarea class="note" placeholder="補充這節做到哪裡…">${esc(rec.note||'')}</textarea>
@@ -317,10 +322,10 @@ function saveCourseProgress(td){
 }
 
 function renderOptions(){
-  document.getElementById('optionList').innerHTML=options.map((o,i)=>`<div class="option-item"><span>${esc(o)}</span><button class="tiny danger" data-i="${i}">從選單移除</button></div>`).join('');
+  document.getElementById('optionList').innerHTML=options.map((o,i)=>`<div class="option-item"><span>${esc(o)}</span><button class="tiny danger" data-i="${i}">停用選項</button></div>`).join('');
   document.querySelectorAll('#optionList [data-i]').forEach(b=>b.onclick=()=>{
     const i=+b.dataset.i, name=options[i];
-    if(confirm(`要把「${name}」從未來的工作下拉選單移除嗎？\n\n已經填過的歷史紀錄會保留，不會刪除。`)){
+    if(confirm(`要停用「${name}」嗎？\n\n停用後只會從「未來可選的代辦事項」中移除；已經排入課表或已完成的工作會永久保留並繼續顯示。`)){
       options.splice(i,1);
       localStorage.setItem('wt_options',JSON.stringify(options));
       renderOptions();
