@@ -269,7 +269,7 @@ function renderSchedule(){
         const k=keyFor(di,pi), rec=records[k]||{task:'',student:'',status:'',note:'',updated:''};
         const done=(rec.status||'').includes('已完成')?' done':'';
         html+=`<td class="cell empty-cell${done}" data-key="${k}">
-          <select class="task"><option value="">＋ 選擇這節做的事</option>${options.map(o=>`<option ${rec.task===o?'selected':''}>${esc(o)}</option>`).join('')}</select>
+          <select class="task"><option value="">＋ 選擇這節做的事</option>${rec.task&&!options.includes(rec.task)?`<option selected value="${esc(rec.task)}">${esc(rec.task)}（已從選項移除）</option>`:''}${options.map(o=>`<option ${rec.task===o?'selected':''}>${esc(o)}</option>`).join('')}</select>
           <select class="studentPick" style="margin-top:6px"><option value="">學生班級姓名（可選）</option>${CASE_STUDENTS.map(s=>`<option ${rec.student===s?'selected':''}>${esc(s)}</option>`).join('')}</select>
           <select class="status status"><option value="">進度狀態</option>${STATUS.map(s=>`<option ${rec.status===s?'selected':''}>${s}</option>`).join('')}</select>
           <textarea class="note" placeholder="補充這節做到哪裡…">${esc(rec.note||'')}</textarea>
@@ -317,8 +317,16 @@ function saveCourseProgress(td){
 }
 
 function renderOptions(){
-  document.getElementById('optionList').innerHTML=options.map((o,i)=>`<div class="option-item"><span>${esc(o)}</span><button class="tiny danger" data-i="${i}">刪除</button></div>`).join('');
-  document.querySelectorAll('#optionList [data-i]').forEach(b=>b.onclick=()=>{options.splice(+b.dataset.i,1);localStorage.setItem('wt_options',JSON.stringify(options));renderOptions();renderSchedule();})
+  document.getElementById('optionList').innerHTML=options.map((o,i)=>`<div class="option-item"><span>${esc(o)}</span><button class="tiny danger" data-i="${i}">從選單移除</button></div>`).join('');
+  document.querySelectorAll('#optionList [data-i]').forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i, name=options[i];
+    if(confirm(`要把「${name}」從未來的工作下拉選單移除嗎？\n\n已經填過的歷史紀錄會保留，不會刪除。`)){
+      options.splice(i,1);
+      localStorage.setItem('wt_options',JSON.stringify(options));
+      renderOptions();
+      renderSchedule();
+    }
+  })
 }
 function addOption(){const inp=document.getElementById('newOption');const v=inp.value.trim();if(v&&!options.includes(v)){options.push(v);localStorage.setItem('wt_options',JSON.stringify(options));inp.value='';renderOptions();renderSchedule();}}
 
