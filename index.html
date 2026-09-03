@@ -82,6 +82,17 @@
   @media print{
     body{background:white}.tabs,.week-nav,.subtitle,.row-actions,.stamp{display:none!important}.app{max-width:none;padding:0}.card{box-shadow:none;border:0}.panel{display:none!important}#schedulePanel{display:block!important}.empty-cell select,.empty-cell textarea{border:0;background:transparent;padding:0}.empty-cell select{appearance:none}.cell{min-height:105px}
   }
+
+/* Work records v2: existing browser-local records are retained. */
+[hidden]{display:none!important}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #426854;outline-offset:2px}button:disabled{opacity:.45;cursor:not-allowed}.light{display:inline-block;flex:none;width:10px;height:10px;border-radius:50%;margin-right:6px;background:#88938c}.light.red{background:#d52f32;box-shadow:0 0 6px #d52f3260}.light.green{background:#31814d}.add-work{width:100%;margin-top:8px;min-height:44px;border-style:dashed}.slot-summary{display:flex;flex-direction:column;gap:8px;width:100%;padding:10px;text-align:left;margin-top:8px;background:#fff5db;font-size:14px;min-height:128px}.slot-summary strong{font-size:14px}.short-task{display:flex;align-items:baseline;min-width:0}.short-task>span:last-child{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere;line-height:1.5}.view-link{color:#46604e;font-weight:700;font-size:14px}.course-progress summary{cursor:pointer;font-size:14px;line-height:1.6}.course-progress label{font-size:14px}.course-progress input,.course-progress select{font-size:14px}.history{table-layout:fixed;min-width:640px}.history th:first-child{width:110px}.history th:nth-child(2){width:85px}.history th:nth-child(4){width:100px}.history th:last-child{width:110px}.history td{vertical-align:middle;white-space:nowrap;height:50px}.row-summary{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:16px}.history .tiny{font-size:14px;min-height:38px}#studentLogsPanel .table-wrap,#historyPanel .table-wrap{max-height:60vh;overflow:auto}.pagination{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin-top:12px}.option-group{background:#faf7f1;padding:14px;border:1px solid var(--line);border-radius:12px;min-width:0}.option-group summary{font-weight:700;cursor:pointer;font-size:16px}.option-group h3{font-size:14px;margin:14px 0 8px}.option-group ul{padding-left:20px;font-size:14px;line-height:1.8}.option-group p{overflow-wrap:anywhere;font-size:14px}
+#workDialog{border:1px solid var(--line);border-radius:18px;width:min(660px,calc(100vw - 24px));max-height:calc(100dvh - 24px);padding:22px;background:var(--card);color:var(--ink);overflow-y:auto;box-shadow:var(--shadow)}#workDialog::backdrop{background:#15281d80}.dialog-head{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:18px}.dialog-head h2{font-size:20px;margin:0}.dialog-head button{flex:none;min-height:44px}.work-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.work-fields label{display:flex;flex-direction:column;gap:7px;font-size:14px;font-weight:700;min-width:0}.work-fields .full{grid-column:1/-1}.work-fields .check{flex-direction:row;align-items:center}.work-fields input,.work-fields select,.work-fields textarea{font-size:16px}.work-fields textarea{min-height:88px}.work-fields input[type=checkbox],.detail-actions input[type=checkbox]{width:20px;height:20px;accent-color:#476952}.detail-top,.detail-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between}.detail-actions{margin-top:16px}.detail-actions label{margin-right:auto;display:flex;align-items:center;gap:7px;font-size:14px}.detail-list{display:grid;gap:14px;margin-top:16px}.work-item{border:1px solid var(--line);border-radius:12px;padding:14px;background:white}.work-item h3{font-size:16px;margin:0;line-height:1.6;overflow-wrap:anywhere}.meta{color:#636d64;font-size:14px;line-height:1.6;overflow-wrap:anywhere}.full-text{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.8;font-size:16px}#formError{color:#b22328;font-size:14px}#workDialog.side-record{margin:12px 12px 12px auto;height:calc(100dvh - 24px);width:min(540px,calc(100vw - 24px));max-height:none}
+@media(max-width:700px){.work-fields{grid-template-columns:1fr}.work-fields .full{grid-column:auto}#workDialog{padding:16px}.history{min-width:580px}.history th:first-child{width:100px}.history th:nth-child(2){width:70px}.history th:nth-child(4){width:88px}.history th:last-child{width:100px}#workDialog.side-record{margin:auto;max-height:calc(100dvh - 24px);height:auto}}
+@media print{dialog{display:none!important}.slot-summary,.add-work{border:0}.add-work,.view-link{display:none!important}.slot-summary{min-height:0;background:transparent}.course-progress:not([open])>*:not(summary){display:none}}
+
+
+/* Soft Morandi palette, with distinct task status indicators. */
+:root{--bg:#f1eeeb;--card:#fbf9f6;--ink:#3f4946;--muted:#68716d;--line:#d7d1cc;--accent:#60776d;--accent2:#bcaaa3;--class:#e7ede8;--empty:#f5f0eb;--done:#e4ebe1;--shadow:0 8px 26px rgba(71,76,71,.06)}
+.tab.active{background:#60776d;border-color:#60776d;color:#fff}.primary{background:#60776d;border-color:#60776d;color:#fff}thead th,.history th,.course-grid .head{background:#e7e6e1}.period{background:#efeee8}.slot-summary{background:#ede5df;border-color:#d5c6bd}.slot-summary:hover{background:#e6dcd5}.view-link{color:#536c61}.notice{background:#e6eceb;border-color:#cdd8d5;color:#52665f}.option-group,.option-item{background:#efede8}.work-item{background:#faf8f4}.light.red{background:#b14b50;box-shadow:0 0 5px #b14b5045}.light.green{background:#58765f}.course-progress .cp-status.not-started-status{color:#a24449;background:#f4e8e5;border-color:#d7b7b2}.course-progress .cp-status.done-status{background:#e4ebe1}.danger,#formError{color:#a24449}
 </style>
 </head>
 <body>
@@ -111,14 +122,14 @@
   </div>
 
   <section id="schedulePanel" class="panel active">
-    <div class="notice">有課的格子可記錄「完成／尚未」，其中「尚未」會以紅字顯示，並可填寫上課進度、小考、作業；空堂可用下拉選單選工作、選擇「進行中／已完成」並補充進度。切換到下週時，固定課程會自動帶入，但每天的課程進度與工作紀錄都依日期分開保存。<br><strong>iPhone 提醒：</strong>若是在「檔案預覽」中開啟，iOS 可能不執行 JavaScript；課表仍會顯示，但下拉選單、切換週次與儲存功能需用 Safari／正式網站開啟。</div>
-    <div class="card table-wrap"><table id="scheduleTable"><thead><tr><th class="period">節次</th><th>8/24（一）</th><th>8/25（二）</th><th>8/26（三）</th><th>8/27（四）</th><th>8/28（五）</th></tr></thead><tbody><tr><td class="period">第一節<small>08:15–09:00</small></td><td class="cell class-cell"><div class="class-title">英二D</div><div class="room">教室6</div></td><td class="cell class-cell"><div class="class-title">英一C</div><div class="room">教室2</div></td><td class="cell empty-cell"><div style="font-weight:700;margin-bottom:6px">空堂</div><div style="font-size:13px;color:#7a7b73">請用 Safari／網站版開啟後選擇工作</div></td><td class="cell class-cell"><div class="class-title">英一D</div><div class="room">教室6</div></td><td class="cell class-cell"><div class="class-title">國三C</div><div class="room">教室5</div></td></tr><tr><td class="period">第二節<small>09:15–10:00</small></td><td class="cell class-cell"><div class="class-title">國三A</div><div class="room">教室6</div></td><td class="cell class-cell"><div class="class-title">數一A</div><div class="room">教室6</div></td><td class="cell class-cell"><div class="class-title">英二D</div><div class="room">教室6</div></td><td class="cell class-cell"><div class="class-title">數一A</div><div class="room">教室6</div></td><td class="cell class-cell"><div class="class-title">國三A</div><div class="room">教室6</div></td></tr><tr><td class="period">第三節<small>10:15–11:00</small></td><td class="cell class-cell"><div class="class-title">英一D</div><div class="room">教室6</div></td><td class="cell class-cell"><div class="class-title">國三C</div><div class="room">教室5</div></td><td class="cell class-cell"><div class="class-title">英一D</div><div class="room">教室6</div></td><td class="cell empty-cell"><div style="font-weight:700;margin-bottom:6px">空堂</div><div style="font-size:13px;color:#7a7b73">請用 Safari／網站版開啟後選擇工作</div></td><td class="cell class-cell"><div class="class-title">職業教育C</div><div class="room">教室6</div></td></tr><tr><td class="period">第四節<small>11:15–12:00</small></td><td class="cell empty-cell"><div style="font-weight:700;margin-bottom:6px">空堂</div><div style="font-size:13px;color:#7a7b73">請用 Safari／網站版開啟後選擇工作</div></td><td class="cell empty-cell"><div style="font-weight:700;margin-bottom:6px">空堂</div><div style="font-size:13px;color:#7a7b73">請用 Safari／網站版開啟後選擇工作</div></td><td class="cell empty-cell"><div style="font-weight:700;margin-bottom:6px">空堂</div><div style="font-size:13px;color:#7a7b73">請用 Safari／網站版開啟後選擇工作</div></td><td class="cell class-cell"><div class="class-title">英一A</div><div class="room">教室3</div></td><td class="cell class-cell"><div class="class-title">社會技巧C</div><div class="room">教室6</div></td></tr><tr><td class="period">第五節<small>13:05–13:50</small></td><td class="cell class-cell"><div class="class-title">國三C</div><div class="room">教室5</div></td><td class="cell class-cell"><div class="class-title">英一D</div><div class="room">教室6</div></td><td class="cell class-cell"><div class="class-title">數一A</div><div class="room">教室6</div></td><td class="cell empty-cell"><div style="font-weight:700;margin-bottom:6px">空堂</div><div style="font-size:13px;color:#7a7b73">請用 Safari／網站版開啟後選擇工作</div></td><td class="cell class-cell"><div class="class-title">英一A</div><div class="room">教室6</div></td></tr><tr><td class="period">第六節<small>14:05–14:50</small></td><td class="cell empty-cell"><div style="font-weight:700;margin-bottom:6px">空堂</div><div style="font-size:13px;color:#7a7b73">請用 Safari／網站版開啟後選擇工作</div></td><td class="cell class-cell"><div class="class-title">英二B</div><div class="room">教室2</div></td><td class="cell class-cell"><div class="class-title">英一A</div><div class="room">教室2</div></td><td class="cell class-cell"><div class="class-title">國三C</div><div class="room">教室5</div></td><td class="cell empty-cell"><div style="font-weight:700;margin-bottom:6px">空堂</div><div style="font-size:13px;color:#7a7b73">請用 Safari／網站版開啟後選擇工作</div></td></tr><tr><td class="period">第七節<small>15:10–15:55</small></td><td class="cell empty-cell"><div style="font-weight:700;margin-bottom:6px">空堂</div><div style="font-size:13px;color:#7a7b73">請用 Safari／網站版開啟後選擇工作</div></td><td class="cell empty-cell"><div style="font-weight:700;margin-bottom:6px">空堂</div><div style="font-size:13px;color:#7a7b73">請用 Safari／網站版開啟後選擇工作</div></td><td class="cell class-cell"><div class="class-title">國三C</div><div class="room">教室5</div></td><td class="cell empty-cell"><div style="font-weight:700;margin-bottom:6px">空堂</div><div style="font-size:13px;color:#7a7b73">請用 Safari／網站版開啟後選擇工作</div></td><td class="cell class-cell"><div class="class-title">數一A</div><div class="room">教室4</div></td></tr><tr><td class="period">第八節<small>16:05–16:50</small></td><td class="cell empty-cell"><div style="font-weight:700;margin-bottom:6px">空堂</div><div style="font-size:13px;color:#7a7b73">請用 Safari／網站版開啟後選擇工作</div></td><td class="cell empty-cell"><div style="font-weight:700;margin-bottom:6px">空堂</div><div style="font-size:13px;color:#7a7b73">請用 Safari／網站版開啟後選擇工作</div></td><td class="cell empty-cell"><div style="font-weight:700;margin-bottom:6px">空堂</div><div style="font-size:13px;color:#7a7b73">請用 Safari／網站版開啟後選擇工作</div></td><td class="cell empty-cell"><div style="font-weight:700;margin-bottom:6px">空堂</div><div style="font-size:13px;color:#7a7b73">請用 Safari／網站版開啟後選擇工作</div></td><td class="cell empty-cell"><div style="font-weight:700;margin-bottom:6px">空堂</div><div style="font-size:13px;color:#7a7b73">請用 Safari／網站版開啟後選擇工作</div></td></tr></tbody></table></div>
+    <div class="notice">每節可記多件工作，點摘要查看全部。未完成亮紅燈；學生與對象都可不選。固定課程的進度、小考與作業可展開填寫。</div>
+    <div class="card table-wrap"><table id="scheduleTable"><caption>課表載入中；請使用可執行 JavaScript 的瀏覽器。</caption></table></div>
   </section>
 
   <section id="optionsPanel" class="panel">
     <div class="card section">
       <h2>工作選項</h2>
-      <div class="help">在這裡新增的內容，會自動出現在每一個空堂的下拉選單。</div>
+      <div class="help">先選大類、小分類，再選具體事項。這些是範本，不會自動變成行程；新增紀錄時也可自訂分類與內容。</div>
       <div class="add-row"><input id="newOption" placeholder="例如：填寫轉銜資料"><button class="primary" id="addOption">新增</button></div>
       <div id="optionList" class="option-list"></div>
     </div>
@@ -127,7 +138,7 @@
   <section id="historyPanel" class="panel">
     <div class="card section">
       <h2>歷史紀錄</h2>
-      <div class="help">只要空堂有選工作或輸入補充，就會保留日期、節次與進度。</div>
+      <div class="help">每件工作分開保存。清單只顯示摘要，點「查看紀錄」閱讀完整內容。</div>
       <div class="history-controls">
         <input id="historyDate" type="date" title="指定某年某月某日" style="max-width:190px">
         <input id="historySearch" placeholder="搜尋工作或進度，例如：IEP、家長、魏" style="max-width:360px">
@@ -153,7 +164,7 @@
   <section id="studentLogsPanel" class="panel">
     <div class="card section">
       <h2>學生處理紀錄</h2>
-      <div class="help">選擇一位學生後，會列出你曾在哪一天、哪一節處理這位學生的什麼事情，以及當時的進度與狀態。</div>
+      <div class="help">每筆一行；點「查看紀錄」在旁邊閱讀完整輔導內容。每頁最多 20 筆。</div>
       <div class="student-log-controls">
         <select id="studentLogFilter"><option value="">請選擇學生</option></select>
         <input id="studentLogDate" type="date" title="指定日期（可選）">
@@ -161,7 +172,7 @@
         <button id="clearStudentLogFilters">清除篩選</button>
       </div>
       <div id="studentLogSummary" class="student-log-summary">請先選擇學生。</div>
-      <div class="table-wrap"><table class="history" id="studentLogTable"></table></div>
+      <div class="table-wrap"><table class="history" id="studentLogTable"></table></div><div id="studentPagination" class="pagination"></div>
     </div>
   </section>
 
@@ -174,6 +185,7 @@
     </div>
   </section>
 </div>
+<dialog id="workDialog" aria-labelledby="dialogTitle"><header class="dialog-head"><h2 id="dialogTitle" tabindex="-1">工作紀錄</h2><button id="closeWorkDialog" aria-label="關閉視窗">✕</button></header><div id="dialogBody"></div></dialog>
 <script>
 const DAYS=['一','二','三','四','五'];
 const PERIODS=[
@@ -215,7 +227,7 @@ const STUDENTS=[
 // 依上傳照片建立；空字串代表空堂。格式：title / room
 const DEFAULT_COURSES=[
   [ {t:'英二D',r:'教室6'}, {t:'英一C',r:'教室2'}, null, {t:'英一D',r:'教室6'}, {t:'國三C',r:'教室5'} ],
-  [ {t:'國三A',r:'教室6'}, {t:'數一A',r:'教室6'}, {t:'英二D',r:'教室6'}, {t:'數一A',r:'教室6'}, {t:'國三A',r:'教室6'} ],
+  [ null, {t:'數一A',r:'教室6'}, {t:'英二D',r:'教室6'}, {t:'數一A',r:'教室6'}, null ],
   [ {t:'英一D',r:'教室6'}, {t:'國三C',r:'教室5'}, {t:'英一D',r:'教室6'}, null, {t:'職業教育C',r:'教室6'} ],
   [ null, null, null, {t:'英一A',r:'教室3'}, {t:'社會技巧C',r:'教室6'} ],
   [ {t:'國三C',r:'教室5'}, {t:'英一D',r:'教室6'}, {t:'數一A',r:'教室6'}, null, {t:'英一A',r:'教室6'} ],
@@ -225,17 +237,16 @@ const DEFAULT_COURSES=[
 ];
 const COURSE_VERSION='115-1-20260828-ref3';
 const clone=x=>JSON.parse(JSON.stringify(x));
-let courses;
-if(localStorage.getItem('wt_course_version')!==COURSE_VERSION){
-  courses=clone(DEFAULT_COURSES);
-  localStorage.setItem('wt_courses',JSON.stringify(courses));
-  localStorage.setItem('wt_course_version',COURSE_VERSION);
-}else{
-  courses=JSON.parse(localStorage.getItem('wt_courses')||'null')||clone(DEFAULT_COURSES);
+function readData(key,fallback){try{const text=localStorage.getItem(key);return text===null?fallback:JSON.parse(text);}catch{alert('瀏覽器紀錄無法讀取，原有資料未變更。請勿清除瀏覽器資料。');throw new Error('Unable to read stored data: '+key);}}
+let courses=readData('wt_courses',null)||clone(DEFAULT_COURSES);
+if(!localStorage.getItem('wt_removed_mon_fri_period2')){
+ const adjusted=clone(courses);
+ for(const day of [0,4])if(adjusted[1]?.[day]?.t==='國三A'&&adjusted[1][day].r==='教室6')adjusted[1][day]=null;
+ try{localStorage.setItem('wt_courses',JSON.stringify(adjusted));localStorage.setItem('wt_removed_mon_fri_period2','1');courses=adjusted;}catch{alert('固定課表調整未能儲存，原有資料仍保留。');}
 }
-let options=JSON.parse(localStorage.getItem('wt_options')||'null')||clone(DEFAULT_OPTIONS);
-let records=JSON.parse(localStorage.getItem('wt_records')||'{}');
-let courseProgress=JSON.parse(localStorage.getItem('wt_course_progress')||'{}');
+let options=readData('wt_options',null)||clone(DEFAULT_OPTIONS);
+let records=readData('wt_records',{});
+let courseProgress=readData('wt_course_progress',{});
 let currentMonday=getMonday(new Date());
 
 function getMonday(d){const x=new Date(d); x.setHours(0,0,0,0); const day=x.getDay()||7; x.setDate(x.getDate()-day+1); return x;}
@@ -246,66 +257,6 @@ function keyFor(dayIndex,periodIndex){return `${ymd(dateFor(dayIndex))}|${period
 function updateYearBanner(){const d=dateFor(0);document.getElementById('yearBanner').textContent=`西元 ${d.getFullYear()} 年｜115學年度第1學期`;document.getElementById('jumpDate').value=ymd(d)}
 function esc(s=''){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
 
-function renderSchedule(){
-  let html='<thead><tr><th class="period">節次</th>';
-  DAYS.forEach((d,i)=>{const dt=dateFor(i);html+=`<th>${shortDate(dt)}（${d}）</th>`}); html+='</tr></thead><tbody>';
-  PERIODS.forEach((p,pi)=>{
-    html+=`<tr><td class="period">${p[0]}<small>${p[1]}</small></td>`;
-    DAYS.forEach((d,di)=>{
-      const c=courses[pi][di];
-      if(c){
-        const k=keyFor(di,pi), cp=courseProgress[k]||{status:'尚未',lesson:'',quiz:'',homework:'',updated:''};
-        const cpDone=cp.status==='完成'?' done':'';
-        html+=`<td class="cell class-cell${cpDone}" data-course-key="${k}">
-          <div class="class-title">${esc(c.t)}</div><div class="room">${esc(c.r||'')}</div>
-          <div class="course-progress">
-            <label>課程進度狀態</label>
-            <select class="cp-status ${cp.status==='完成'?'done-status':'not-started-status'}"><option ${cp.status==='尚未'?'selected':''}>尚未</option><option ${cp.status==='完成'?'selected':''}>完成</option></select>
-            <label>上課進度</label><input class="cp-lesson" value="${esc(cp.lesson||'')}" placeholder="自行填入上課進度">
-            <label>小考</label><input class="cp-quiz" value="${esc(cp.quiz||'')}" placeholder="例如：L1單字小考">
-            <label>作業</label><input class="cp-homework" value="${esc(cp.homework||'')}" placeholder="例如：習作P.12">
-            <div class="course-stamp">${cp.updated?`最後更新：${esc(cp.updated)}`:'尚未紀錄'}</div>
-          </div>
-        </td>`
-      }
-      else{
-        const k=keyFor(di,pi), rec=records[k]||{task:'',student:'',status:'',note:'',updated:''};
-        const done=(rec.status||'').includes('已完成')?' done':'';
-        const completedSummary=(rec.status||'').includes('已完成')&&rec.task?`<div class="completed-summary"><strong>✅ ${esc(rec.task)}</strong>${rec.student?`<div class="meta">${esc(rec.student)}</div>`:''}${rec.note?`<div class="note-line">${esc(rec.note)}</div>`:''}</div>`:'';
-        html+=`<td class="cell empty-cell${done}" data-key="${k}">
-          ${completedSummary}
-          <select class="task"><option value="">＋ 選擇這節做的事</option>${rec.task&&!options.includes(rec.task)?`<option selected value="${esc(rec.task)}">${esc(rec.task)}（已停用，歷史保留）</option>`:''}${options.map(o=>`<option ${rec.task===o?'selected':''}>${esc(o)}</option>`).join('')}</select>
-          <select class="studentPick" style="margin-top:6px"><option value="">學生班級姓名（可選）</option>${CASE_STUDENTS.map(s=>`<option ${rec.student===s?'selected':''}>${esc(s)}</option>`).join('')}</select>
-          <select class="status status"><option value="">進度狀態</option>${STATUS.map(s=>`<option ${rec.status===s?'selected':''}>${s}</option>`).join('')}</select>
-          <textarea class="note" placeholder="補充這節做到哪裡…">${esc(rec.note||'')}</textarea>
-          <div class="stamp">${rec.updated?`最後更新：${esc(rec.updated)}`:'尚未紀錄'}</div>
-          <div class="row-actions"><button class="tiny clearRec">清除此節</button></div>
-        </td>`
-      }
-    }); html+='</tr>';
-  });
-  html+='</tbody>'; document.getElementById('scheduleTable').innerHTML=html;
-  updateYearBanner();
-  document.querySelectorAll('.empty-cell').forEach(td=>{
-    ['task','studentPick','status','note'].forEach(cls=>td.querySelector('.'+cls).addEventListener(cls==='note'?'input':'change',()=>saveCell(td)));
-    td.querySelector('.clearRec').addEventListener('click',()=>{if(confirm('清除這一節的工作紀錄？')){delete records[td.dataset.key];saveRecords();renderSchedule();renderHistory();}})
-  });
-  document.querySelectorAll('.class-cell[data-course-key]').forEach(td=>{
-    ['cp-status','cp-lesson','cp-quiz','cp-homework'].forEach(cls=>{
-      const el=td.querySelector('.'+cls);
-      el.addEventListener(cls==='cp-status'?'change':'input',()=>saveCourseProgress(td));
-    });
-  });
-}
-function saveCell(td){
-  const task=td.querySelector('.task').value, student=td.querySelector('.studentPick').value, status=td.querySelector('.status').value, note=td.querySelector('.note').value.trim();
-  if(!task&&!student&&!status&&!note){delete records[td.dataset.key]} else {records[td.dataset.key]={task,student,status,note,updated:new Date().toLocaleString('zh-TW',{hour12:false})}}
-  saveRecords();
-  if(status.includes('已完成')) td.classList.add('done'); else td.classList.remove('done');
-  td.querySelector('.stamp').textContent=records[td.dataset.key]?.updated?`最後更新：${records[td.dataset.key].updated}`:'尚未紀錄';
-  renderHistory();
-}
-function saveRecords(){localStorage.setItem('wt_records',JSON.stringify(records))}
 function saveCourseProgress(td){
   const k=td.dataset.courseKey;
   const status=td.querySelector('.cp-status').value;
@@ -321,34 +272,10 @@ function saveCourseProgress(td){
   td.querySelector('.course-stamp').textContent=`最後更新：${updated}`;
 }
 
-function renderOptions(){
-  document.getElementById('optionList').innerHTML=options.map((o,i)=>`<div class="option-item"><span>${esc(o)}</span><button class="tiny danger" data-i="${i}">停用選項</button></div>`).join('');
-  document.querySelectorAll('#optionList [data-i]').forEach(b=>b.onclick=()=>{
-    const i=+b.dataset.i, name=options[i];
-    if(confirm(`要停用「${name}」嗎？\n\n停用後只會從「未來可選的代辦事項」中移除；已經排入課表或已完成的工作會永久保留並繼續顯示。`)){
-      options.splice(i,1);
-      localStorage.setItem('wt_options',JSON.stringify(options));
-      renderOptions();
-      renderSchedule();
-    }
-  })
-}
 function addOption(){const inp=document.getElementById('newOption');const v=inp.value.trim();if(v&&!options.includes(v)){options.push(v);localStorage.setItem('wt_options',JSON.stringify(options));inp.value='';renderOptions();renderSchedule();}}
 
-function allHistoryRows(){
-  return Object.entries(records).map(([k,r])=>{const [date,pi]=k.split('|');return {date,pi:+pi,...r}}).sort((a,b)=>a.date===b.date?a.pi-b.pi:a.date.localeCompare(b.date));
-}
-function renderHistory(){
-  const q=(document.getElementById('historySearch')?.value||'').trim().toLowerCase();
-  const fd=(document.getElementById('historyDate')?.value||'').trim();
-  const rows=allHistoryRows().filter(r=>(!fd||r.date===fd)&&(!q||`${r.date}${r.task}${r.student||''}${r.status}${r.note}`.toLowerCase().includes(q)));
-  let h='<thead><tr><th>日期</th><th>節次</th><th>工作</th><th>學生班級姓名</th><th>狀態</th><th>本節進度</th><th>最後更新</th></tr></thead><tbody>';
-  if(!rows.length)h+='<tr><td colspan="7" style="text-align:center;color:#888;padding:20px">尚無符合紀錄</td></tr>';
-  rows.forEach(r=>h+=`<tr><td>${esc(r.date)}</td><td>${PERIODS[r.pi][0]}<br><small>${PERIODS[r.pi][1]}</small></td><td>${esc(r.task||'—')}</td><td>${esc(r.student||'—')}</td><td><span class="badge">${esc(r.status||'—')}</span></td><td>${esc(r.note||'—')}</td><td>${esc(r.updated||'')}</td></tr>`);
-  document.getElementById('historyTable').innerHTML=h+'</tbody>';
-}
 function exportCsv(){
-  const rows=[['日期','節次','時間','工作','學生班級姓名','狀態','本節進度','最後更新'],...allHistoryRows().map(r=>[r.date,PERIODS[r.pi][0],PERIODS[r.pi][1],r.task||'',r.student||'',r.status||'',r.note||'',r.updated||''])];
+  const rows=[['日期','節次','時間','大類','小分類','工作','備課科目','學生班級姓名','對象','自訂對象','狀態','完整紀錄','最後更新'],...allHistoryRows().map(r=>[r.date,PERIODS[r.pi]?.[0]||'',PERIODS[r.pi]?.[1]||'',r.category||'',r.subcategory||'',r.task||'',r.subject||'',r.student||'',r.targetType||'',r.customTarget||'',r.status||'',r.note||'',r.updated||''])];
   const csv='\ufeff'+rows.map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='工作課表歷史紀錄.csv';a.click();URL.revokeObjectURL(a.href);
 }
@@ -396,24 +323,149 @@ function buildStudentLogFilter(){
   if(!sel)return;
   sel.innerHTML='<option value="">請選擇學生</option>'+CASE_STUDENTS.map(s=>`<option value="${esc(s)}">${esc(s)}</option>`).join('');
 }
-function renderStudentLogs(){
-  const student=(document.getElementById('studentLogFilter')?.value||'').trim();
-  const fd=(document.getElementById('studentLogDate')?.value||'').trim();
-  const q=(document.getElementById('studentLogSearch')?.value||'').trim().toLowerCase();
-  const table=document.getElementById('studentLogTable');
-  const summary=document.getElementById('studentLogSummary');
-  if(!student){
-    summary.textContent='請先選擇學生。';
-    table.innerHTML='<thead><tr><th>日期</th><th>節次</th><th>工作</th><th>狀態</th><th>本節進度</th><th>最後更新</th></tr></thead><tbody><tr><td colspan="6" style="text-align:center;color:#888;padding:20px">尚未選擇學生</td></tr></tbody>';
-    return;
-  }
-  const rows=allHistoryRows().filter(r=>r.student===student&&(!fd||r.date===fd)&&(!q||`${r.task}${r.status}${r.note}`.toLowerCase().includes(q)));
-  summary.textContent=`${student}｜共 ${rows.length} 筆符合紀錄`;
-  let h='<thead><tr><th>日期</th><th>節次</th><th>工作</th><th>狀態</th><th>本節進度</th><th>最後更新</th></tr></thead><tbody>';
-  if(!rows.length)h+='<tr><td colspan="6" style="text-align:center;color:#888;padding:20px">尚無符合紀錄</td></tr>';
-  rows.forEach(r=>h+=`<tr><td>${esc(r.date)}</td><td>${PERIODS[r.pi][0]}<br><small>${PERIODS[r.pi][1]}</small></td><td>${esc(r.task||'—')}</td><td><span class="badge">${esc(r.status||'—')}</span></td><td>${esc(r.note||'—')}</td><td>${esc(r.updated||'')}</td></tr>`);
-  table.innerHTML=h+'</tbody>';
+
+const WORK_GROUPS=[{"name":"需求評估","groups":[{"name":"個案與計畫","items":["個案建檔","需求評估","IEP 擬定與檢討"]},{"name":"環境與資源","items":["環境評估與調整","輔具申請與訓練","轉銜與升學"]}]},{"name":"教學備課","groups":[{"name":"課程準備","items":["課程規劃","教材與評量調整","備課與共備"]},{"name":"教學與評量","items":["個別／小組教學","學習策略教學","學習紀錄與評量"]}]},{"name":"個別輔導","groups":[{"name":"晤談與適應","items":["個別晤談","適性輔導","生活適應"]},{"name":"學習與情緒","items":["學習輔導","情緒調節","人際互動"]}]},{"name":"諮詢合作","groups":[{"name":"親師諮詢","items":["家長聯繫","特教諮詢","課程調整諮詢"]},{"name":"團隊合作","items":["專業與巡迴合作","同儕支持與訓練","助理人員協作"]}]},{"name":"入班支援","groups":[{"name":"課堂支持","items":["入班觀察","入班協助","課堂參與支持"]},{"name":"行為支持","items":["行為觀察與評估","行為介入與追蹤","突發事件處理"]}]},{"name":"行政成長","groups":[{"name":"行政與宣導","items":["資料與會議紀錄","服務與資源申請","特教宣導"]},{"name":"進修與反思","items":["研習進修","觀課與案例討論","教學檢討與改進"]}]}];
+const BUILTIN=WORK_GROUPS.flatMap(g=>g.groups.flatMap(s=>s.items.map(task=>({category:g.name,subcategory:s.name,task}))));
+const STORE_KEY='wt_records_v2';
+const savedV2=readData(STORE_KEY,null);
+if(savedV2&&(savedV2.version!==2||!savedV2.slots||typeof savedV2.slots!=='object'))throw new Error('工作紀錄格式無法辨識，原始資料未變更。');
+records=savedV2?savedV2.slots:Object.fromEntries(Object.entries(records).map(([key,r])=>[key,Array.isArray(r)?r:[{...r,id:'legacy:'+key,category:r.category||'',subcategory:r.subcategory||'',targetType:r.targetType||'',customTarget:r.customTarget||'',subject:r.subject||''}]]));
+let customTemplates=savedV2?.templates||[];
+let activeKey='',editingId=null,studentPage=0;
+const workDialog=document.getElementById('workDialog');
+const dialogBody=document.getElementById('dialogBody');
+const listFor=key=>records[key]||[];
+const isDone=r=>(r.status||'').includes('已完成');
+const isPending=r=>!!r.status&&!isDone(r);
+const stateText=r=>isDone(r)?'已完成':isPending(r)?'未完成':'未設定';
+function summaryFor(items){
+ const sorted=items.map((record,index)=>({record,index})).sort((a,b)=>(isDone(a.record)?2:isPending(a.record)?0:1)-(isDone(b.record)?2:isPending(b.record)?0:1)||a.index-b.index).map(x=>x.record);
+ const pending=items.filter(isPending).length,unknown=items.filter(r=>!r.status).length;
+ return {sorted,pending,label:'共 '+items.length+' 件・'+pending+' 件未完成'+(unknown?'・'+unknown+' 件未設定':'')};
 }
+function light(r){return '<span class="light '+(isDone(r)?'green':isPending(r)?'red':'gray')+'" aria-hidden="true"></span>';}
+function persist(next,templates=customTemplates){
+ try{
+  localStorage.setItem(STORE_KEY,JSON.stringify({version:2,slots:next,templates}));
+  records=next;customTemplates=templates;return true;
+ }catch{alert('儲存失敗，可能是瀏覽器空間不足或禁止儲存。原有紀錄未被清除，請先匯出備份。');return false}
+}
+function refreshRecords(){renderSchedule();renderHistory();renderStudentLogs();}
+function openDialog(title,side=false){
+ document.getElementById('dialogTitle').textContent=title;
+ workDialog.classList.toggle('side-record',side);
+ if(!workDialog.open)workDialog.showModal();
+ else document.getElementById('dialogTitle').focus();
+}
+function slotTitle(key){const [date,pi]=key.split('|');return date+'・'+(PERIODS[+pi]?.[0]||'原節次');}
+function renderSchedule(){
+ let html='<thead><tr><th class="period">節次</th>'+DAYS.map((d,i)=>'<th>'+shortDate(dateFor(i))+'（'+d+'）</th>').join('')+'</tr></thead><tbody>';
+ PERIODS.forEach((p,pi)=>{
+  html+='<tr><td class="period">'+p[0]+'<small>'+p[1]+'</small></td>';
+  DAYS.forEach((d,di)=>{
+   const c=courses[pi][di],k=keyFor(di,pi),items=listFor(k),summary=summaryFor(items);
+   html+='<td class="cell '+(c?'class-cell':'empty-cell')+'" '+(c?'data-course-key="'+k+'"':'')+'>';
+   if(c){
+    const cp=courseProgress[k]||{status:'尚未'};
+    html+='<div class="class-title">'+esc(c.t)+'</div><div class="room">'+esc(c.r||'')+'</div><details class="course-progress"><summary>'+ (cp.status==='完成'?'課程已完成':'🔴 課程尚未完成')+'・查看進度</summary><label>課程進度狀態</label><select class="cp-status '+(cp.status==='完成'?'done-status':'not-started-status')+'"><option '+(cp.status==='尚未'?'selected':'')+'>尚未</option><option '+(cp.status==='完成'?'selected':'')+'>完成</option></select><label>上課進度</label><input class="cp-lesson" value="'+esc(cp.lesson||'')+'"><label>小考</label><input class="cp-quiz" value="'+esc(cp.quiz||'')+'"><label>作業</label><input class="cp-homework" value="'+esc(cp.homework||'')+'"><div class="course-stamp">'+esc(cp.updated||'尚未紀錄')+'</div></details>';
+   }
+   if(items.length){
+    html+='<button class="slot-summary" data-open-slot="'+esc(k)+'"><strong>'+(summary.pending?'<span class="light red"></span>':'')+summary.label+'</strong>';
+    summary.sorted.slice(0,2).forEach(r=>{html+='<span class="short-task">'+light(r)+'<span>'+esc((r.task||r.note||'工作紀錄').slice(0,50))+'</span></span>';});
+    html+='<span class="view-link">查看全部／新增一件 →</span></button>';
+   }else html+='<button class="add-work" data-open-slot="'+esc(k)+'">＋新增紀錄</button>';
+   html+='</td>';
+  });html+='</tr>';
+ });
+ document.getElementById('scheduleTable').innerHTML=html+'</tbody>';updateYearBanner();
+ document.querySelectorAll('[data-open-slot]').forEach(button=>button.onclick=()=>openSlot(button.dataset.openSlot));
+ document.querySelectorAll('[data-course-key]').forEach(td=>['cp-status','cp-lesson','cp-quiz','cp-homework'].forEach(cls=>{
+  const el=td.querySelector('.'+cls);el.addEventListener(cls==='cp-status'?'change':'input',()=>{saveCourseProgress(td);td.querySelector('summary').textContent=(courseProgress[td.dataset.courseKey].status==='完成'?'課程已完成':'🔴 課程尚未完成')+'・查看進度';});
+ }));
+}
+function openSlot(key){
+ activeKey=key;editingId=null;
+ if(!listFor(key).length){openForm(key);return;}
+ openDialog(slotTitle(key));
+ const summary=summaryFor(listFor(key));
+ dialogBody.innerHTML='<div class="detail-top"><strong>'+summary.label+'</strong><button class="primary" id="newWork">＋新增一件</button></div><div class="detail-list">'+summary.sorted.map(r=>'<article class="work-item"><h3>'+light(r)+esc(r.task||'工作紀錄')+'</h3><p class="meta">'+esc([r.category,r.subcategory,r.subject?'備課：'+r.subject:'',r.student,r.targetType,r.customTarget].filter(Boolean).join('・'))+'</p>'+(r.note?'<p class="full-text">'+esc(r.note)+'</p>':'')+'<div class="detail-actions"><label><input type="checkbox" data-complete="'+esc(r.id)+'" '+(isDone(r)?'checked':'')+'> '+stateText(r)+'</label><button data-edit="'+esc(r.id)+'">編輯</button><button class="danger" data-delete="'+esc(r.id)+'">刪除</button></div></article>').join('')+'</div>';
+ document.getElementById('newWork').onclick=()=>openForm(key);
+ dialogBody.querySelectorAll('[data-complete]').forEach(input=>input.onchange=()=>{const next=clone(records);const item=next[key].find(r=>r.id===input.dataset.complete);item.status=input.checked?'已完成':'未完成';item.updated=new Date().toLocaleString('zh-TW',{hour12:false});if(persist(next)){refreshRecords();openSlot(key)}else input.checked=!input.checked;});
+ dialogBody.querySelectorAll('[data-edit]').forEach(button=>button.onclick=()=>openForm(key,button.dataset.edit));
+ dialogBody.querySelectorAll('[data-delete]').forEach(button=>button.onclick=()=>{
+  if(!confirm('刪除這一件？其他工作會保留。'))return;
+  const next=clone(records);next[key]=next[key].filter(r=>r.id!==button.dataset.delete);if(!next[key].length)delete next[key];
+  if(persist(next)){refreshRecords();if(listFor(key).length)openSlot(key);else workDialog.close();}
+ });
+}
+function templateOptions(){return [...BUILTIN,...customTemplates,...options.map(task=>({category:'原有選項',subcategory:'自訂工作',task}))];}
+function openForm(key,id=null){
+ activeKey=key;editingId=id;const r=id?listFor(key).find(item=>item.id===id):{status:'未完成'};
+ openDialog((id?'編輯':'新增')+'工作・'+slotTitle(key));
+ const subjects=[...new Set(courses.flat().filter(Boolean).map(c=>c.t))];
+ if(r.subject&&!subjects.includes(r.subject))subjects.push(r.subject);
+ dialogBody.innerHTML='<form id="workForm"><div class="work-fields"><label>① 工作大類<input id="workCategory" list="categoryChoices" maxlength="100" placeholder="選擇或自行輸入" value="'+esc(r.category||'')+'"><datalist id="categoryChoices"></datalist></label><label>② 小分類<input id="workSubcategory" list="subcategoryChoices" maxlength="100" placeholder="選擇或自行輸入" value="'+esc(r.subcategory||'')+'"><datalist id="subcategoryChoices"></datalist></label><label class="full">③ 具體事項<select id="workTemplate"><option value="">選用範本或自行填寫</option></select></label><label class="full">工作內容<textarea id="workTask" maxlength="10000" placeholder="選範本後可修改，也可直接填寫">'+esc(r.task||'')+'</textarea></label><label class="full check"><input type="checkbox" id="isPrep" '+(r.subject?'checked':'')+'>這件工作是備課</label><label class="full" id="subjectField" '+(!r.subject?'hidden':'')+'>備課科目<select id="workSubject"><option value="">請選擇目前授課科目</option>'+subjects.map(s=>'<option '+(s===r.subject?'selected':'')+'>'+esc(s)+'</option>').join('')+'</select></label><label>學生（選填）<select id="workStudent"><option value="">不選擇</option>'+[...new Set([...CASE_STUDENTS,...(r.student?[r.student]:[])])].map(s=>'<option '+(r.student===s?'selected':'')+'>'+esc(s)+'</option>').join('')+'</select></label><label>對象（選填）<select id="workTarget"><option value="">不選擇</option>'+['學生本人','家長','導師','自行填寫'].map(s=>'<option '+(r.targetType===s?'selected':'')+'>'+s+'</option>').join('')+'</select></label><label class="full" id="customTargetField" '+(r.targetType==='自行填寫'?'':'hidden')+'>自訂對象<input id="workCustomTarget" value="'+esc(r.customTarget||'')+'"></label><label class="full">完整紀錄／備註<textarea id="workNote" maxlength="10000">'+esc(r.note||'')+'</textarea></label><label>完成狀態<select id="workStatus">'+(id&&!r.status?'<option value="">未設定（保留）</option>':'')+'<option value="未完成" '+(isPending(r)?'selected':'')+'>🔴 未完成</option><option value="已完成" '+(isDone(r)?'selected':'')+'>已完成</option></select></label><label class="full check"><input id="rememberWork" type="checkbox">將這項事項與分類保留在選單</label></div>'+(id&&!r.category?'<p class="help">舊紀錄可保留未分類，不會自動猜測分類。</p>':'')+'<p id="formError" role="alert"></p><footer class="detail-actions"><button type="button" id="cancelWork">取消</button><button class="primary" type="submit">儲存這一件</button></footer></form>';
+ const cat=document.getElementById('workCategory'),sub=document.getElementById('workSubcategory'),template=document.getElementById('workTemplate');
+ document.getElementById('categoryChoices').innerHTML=[...new Set(templateOptions().map(t=>t.category))].map(c=>'<option value="'+esc(c)+'">').join('');
+ function updateSub(){document.getElementById('subcategoryChoices').innerHTML=[...new Set(templateOptions().filter(t=>t.category===cat.value).map(t=>t.subcategory))].map(c=>'<option value="'+esc(c)+'">').join('');updateTasks();}
+ function updateTasks(){template.innerHTML='<option value="">選用範本或自行填寫</option>'+[...new Set(templateOptions().filter(t=>t.category===cat.value&&t.subcategory===sub.value).map(t=>t.task))].map(task=>'<option>'+esc(task)+'</option>').join('');}
+ cat.oninput=()=>{sub.value='';updateSub()};sub.oninput=updateTasks;updateSub();
+ template.onchange=()=>{if(template.value)document.getElementById('workTask').value=template.value;if(template.value==='備課與共備'){document.getElementById('isPrep').checked=true;document.getElementById('subjectField').hidden=false;}};
+ document.getElementById('isPrep').onchange=e=>document.getElementById('subjectField').hidden=!e.target.checked;
+ document.getElementById('workTarget').onchange=e=>document.getElementById('customTargetField').hidden=e.target.value!=='自行填寫';
+ document.getElementById('cancelWork').onclick=()=>listFor(key).length?openSlot(key):workDialog.close();
+ document.getElementById('workForm').onsubmit=event=>{
+  event.preventDefault();const get=id=>document.getElementById(id).value.trim();
+  const category=get('workCategory'),subcategory=get('workSubcategory'),prep=document.getElementById('isPrep').checked,subject=prep?get('workSubject'):'',task=get('workTask')||(subject?'備課：'+subject:''),targetType=get('workTarget'),customTarget=targetType==='自行填寫'?get('workCustomTarget'):'',remember=document.getElementById('rememberWork').checked;
+  let error='';
+  if(!task)error='請填寫工作內容。';
+  else if((!category||!subcategory)&&!(id&&!r.category&&!category&&!subcategory))error='請選擇大類與小分類，也可自行輸入。';
+  else if(prep&&!subject)error='請選擇備課科目。';
+  else if(targetType==='自行填寫'&&!customTarget)error='請填寫自訂對象。';
+  else if(remember&&(!category||!subcategory||task.length>500))error='保留選項需要完整分類，事項限 500 字。';
+  if(error){document.getElementById('formError').textContent=error;return}
+  const next=clone(records),item={...r,id:id||crypto.randomUUID(),task,category,subcategory,subject,student:get('workStudent'),targetType,customTarget,note:get('workNote'),status:get('workStatus'),updated:new Date().toLocaleString('zh-TW',{hour12:false})};
+  if(!next[key])next[key]=[];
+  if(id){const index=next[key].findIndex(r=>r.id===id);if(index<0)return;next[key][index]=item;}else next[key].push(item);
+  const templates=clone(customTemplates);
+  if(remember&&!templates.some(t=>t.category===category&&t.subcategory===subcategory&&t.task===task))templates.push({category,subcategory,task});
+  if(persist(next,templates)){refreshRecords();renderOptions();openSlot(key);}
+ };
+}
+function allHistoryRows(){
+ return Object.entries(records).flatMap(([key,items])=>{const [date,pi]=key.split('|');return items.map(r=>({...r,key,date,pi:+pi}));}).sort((a,b)=>b.date.localeCompare(a.date)||a.pi-b.pi);
+}
+function recordRows(rows){
+ return '<thead><tr><th>日期</th><th>節次</th><th>工作摘要</th><th>狀態</th><th>詳細</th></tr></thead><tbody>'+(rows.length?rows.map(r=>'<tr><td>'+esc(r.date)+'</td><td>'+esc(PERIODS[r.pi]?.[0]||'')+'</td><td><span class="row-summary">'+esc(r.task||'工作紀錄')+'</span></td><td>'+light(r)+stateText(r)+'</td><td><button class="tiny" data-view-key="'+esc(r.key)+'" data-view-id="'+esc(r.id)+'">查看紀錄</button></td></tr>').join(''):'<tr><td colspan="5">尚無符合紀錄</td></tr>')+'</tbody>';
+}
+function wireRecordRows(table){table.querySelectorAll('[data-view-id]').forEach(button=>button.onclick=()=>showRecord(button.dataset.viewKey,button.dataset.viewId));}
+function showRecord(key,id){
+ const r=listFor(key).find(r=>r.id===id);if(!r)return;openDialog('工作／輔導紀錄',true);
+ dialogBody.innerHTML='<p>'+esc(slotTitle(key))+'</p><p>'+esc(r.student||'未選學生')+'・'+light(r)+stateText(r)+'</p><p class="meta">'+esc([r.category,r.subcategory,r.subject?'備課：'+r.subject:''].filter(Boolean).join(' › '))+'</p><h3>工作內容</h3><p class="full-text">'+esc(r.task||'未填寫')+'</p><h3>聯繫對象</h3><p>'+esc([r.targetType,r.customTarget].filter(Boolean).join('・')||'不選擇')+'</p><h3>完整紀錄／備註</h3><p class="full-text">'+esc(r.note||'未填寫')+'</p><button id="editViewed">編輯這一件</button>';
+ document.getElementById('editViewed').onclick=()=>openForm(key,id);
+}
+function renderHistory(){
+ const q=(document.getElementById('historySearch')?.value||'').trim().toLowerCase(),fd=document.getElementById('historyDate').value;
+ const rows=allHistoryRows().filter(r=>(!fd||r.date===fd)&&(!q||[r.task,r.note,r.student,r.targetType,r.customTarget,r.category,r.subcategory,r.subject].join(' ').toLowerCase().includes(q)));
+ const table=document.getElementById('historyTable');table.innerHTML=recordRows(rows);wireRecordRows(table);
+}
+function renderStudentLogs(){
+ const student=document.getElementById('studentLogFilter').value,fd=document.getElementById('studentLogDate').value,q=document.getElementById('studentLogSearch').value.trim().toLowerCase();
+ const rows=student?allHistoryRows().filter(r=>r.student===student&&(!fd||r.date===fd)&&(!q||[r.task,r.note,r.status,r.category,r.subcategory,r.targetType].join(' ').toLowerCase().includes(q))):[];
+ studentPage=Math.min(studentPage,Math.max(0,Math.ceil(rows.length/20)-1));
+ document.getElementById('studentLogSummary').textContent=student?student+'｜共 '+rows.length+' 筆紀錄':'請先選擇學生。';
+ const table=document.getElementById('studentLogTable');table.innerHTML=recordRows(rows.slice(studentPage*20,studentPage*20+20));wireRecordRows(table);
+ document.getElementById('studentPagination').innerHTML='<button id="studentPrev" '+(!studentPage?'disabled':'')+'>上一頁</button><span>第 '+(studentPage+1)+' 頁</span><button id="studentNext" '+((studentPage+1)*20>=rows.length?'disabled':'')+'>下一頁</button>';
+ document.getElementById('studentPrev').onclick=()=>{studentPage--;renderStudentLogs()};document.getElementById('studentNext').onclick=()=>{studentPage++;renderStudentLogs()};
+}
+function renderOptions(){
+ const legacy=options.map((o,i)=>'<div class="option-item"><span>'+esc(o)+'</span><button class="tiny danger" data-i="'+i+'">停用</button></div>').join('');
+ document.getElementById('optionList').innerHTML=WORK_GROUPS.map(g=>'<details class="option-group"><summary>'+esc(g.name)+'</summary>'+g.groups.map(s=>'<h3>'+esc(s.name)+'</h3><ul>'+s.items.map(t=>'<li>'+esc(t)+'</li>').join('')+'</ul>').join('')+'</details>').join('')+'<details class="option-group"><summary>自訂與原有選項</summary>'+legacy+customTemplates.map(t=>'<p>'+esc(t.category+' › '+t.subcategory+' › '+t.task)+'</p>').join('')+'</details>';
+ document.querySelectorAll('#optionList [data-i]').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;if(!confirm('停用這個選項？已儲存的紀錄會保留。'))return;const next=options.filter((_,j)=>j!==i);try{localStorage.setItem('wt_options',JSON.stringify(next));options=next;renderOptions();}catch{alert('未能儲存，選項仍保留。')}});
+}
+document.getElementById('closeWorkDialog').onclick=()=>workDialog.close();
+workDialog.addEventListener('click',event=>{if(event.target===workDialog){const box=workDialog.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)workDialog.close();}});
+
 function switchTab(id){document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===id));if(id==='historyPanel')renderHistory();if(id==='studentsPanel')renderStudentMaster();if(id==='studentLogsPanel')renderStudentLogs();if(id==='coursesPanel')renderCourseGrid()}
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>switchTab(t.dataset.tab));
 document.getElementById('prevWeek').onclick=()=>{currentMonday.setDate(currentMonday.getDate()-7);renderSchedule()};
