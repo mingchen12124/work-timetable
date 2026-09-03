@@ -471,8 +471,8 @@ function openForm(key,id=null){
 function allHistoryRows(){
  return Object.entries(records).flatMap(([key,items])=>{const [date,pi]=key.split('|');return items.map(r=>({...r,key,date,pi:+pi}));}).sort((a,b)=>b.date.localeCompare(a.date)||a.pi-b.pi);
 }
-function recordRows(rows){
- return '<thead><tr><th>日期</th><th>節次</th><th>工作摘要</th><th>狀態</th><th>詳細</th></tr></thead><tbody>'+(rows.length?rows.map(r=>'<tr><td>'+esc(r.date)+'</td><td>'+esc(PERIODS[r.pi]?.[0]||'')+'</td><td><span class="row-summary">'+esc(r.task||'工作紀錄')+'</span></td><td>'+light(r)+stateText(r)+'</td><td><button class="tiny" data-view-key="'+esc(r.key)+'" data-view-id="'+esc(r.id)+'">查看紀錄</button></td></tr>').join(''):'<tr><td colspan="5">尚無符合紀錄</td></tr>')+'</tbody>';
+function recordRows(rows,showStudent=false){
+ return '<thead><tr><th>日期</th><th>節次</th><th>工作摘要</th><th>狀態</th><th>詳細</th></tr></thead><tbody>'+(rows.length?rows.map(r=>'<tr><td>'+esc(r.date)+'</td><td>'+esc(PERIODS[r.pi]?.[0]||'')+'</td><td><span class="row-summary">'+esc((showStudent&&r.student?.trim()?r.student.trim()+'｜':'')+(r.task||'工作紀錄'))+'</span></td><td>'+light(r)+stateText(r)+'</td><td><button class="tiny" data-view-key="'+esc(r.key)+'" data-view-id="'+esc(r.id)+'">查看紀錄</button></td></tr>').join(''):'<tr><td colspan="5">尚無符合紀錄</td></tr>')+'</tbody>';
 }
 function wireRecordRows(table){table.querySelectorAll('[data-view-id]').forEach(button=>button.onclick=()=>showRecord(button.dataset.viewKey,button.dataset.viewId));}
 function showRecord(key,id){
@@ -483,7 +483,7 @@ function showRecord(key,id){
 function renderHistory(){
  const q=(document.getElementById('historySearch')?.value||'').trim().toLowerCase(),fd=document.getElementById('historyDate').value;
  const rows=allHistoryRows().filter(r=>(!fd||r.date===fd)&&(!q||[r.task,r.note,r.student,r.targetType,r.customTarget,r.category,r.subcategory,r.subject].join(' ').toLowerCase().includes(q)));
- const table=document.getElementById('historyTable');table.innerHTML=recordRows(rows);wireRecordRows(table);
+ const table=document.getElementById('historyTable');table.innerHTML=recordRows(rows,true);wireRecordRows(table);
 }
 function renderStudentLogs(){
  const student=document.getElementById('studentLogFilter').value,fd=document.getElementById('studentLogDate').value,q=document.getElementById('studentLogSearch').value.trim().toLowerCase();
