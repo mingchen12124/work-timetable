@@ -95,7 +95,7 @@
 .tab.active{background:#60776d;border-color:#60776d;color:#fff}.primary{background:#60776d;border-color:#60776d;color:#fff}thead th,.history th,.course-grid .head{background:#e7e6e1}.period{background:#efeee8}.slot-summary{background:#ede5df;border-color:#d5c6bd}.slot-summary:hover{background:#e6dcd5}.view-link{color:#536c61}.notice{background:#e6eceb;border-color:#cdd8d5;color:#52665f}.option-group,.option-item{background:#efede8}.work-item{background:#faf8f4}.light.red{background:#b14b50;box-shadow:0 0 5px #b14b5045}.light.green{background:#58765f}.course-progress .cp-status.not-started-status{color:#a24449;background:#f4e8e5;border-color:#d7b7b2}.course-progress .cp-status.done-status{background:#e4ebe1}.danger,#formError{color:#a24449}
 .course-progress textarea{height:40px;min-height:40px;max-height:40px;overflow:hidden;resize:none;white-space:pre;font-size:16px;line-height:24px;padding:7px;margin:5px 0 8px}.course-progress label{margin-top:8px}.course-progress .cp-status{margin-top:5px;min-height:40px}.course-stamp{font-size:12px}
 .note-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.note-heading button{min-height:40px;font-size:14px}.note-heading button[aria-pressed="true"]{color:#a24449;background:#f4e8e5;border-color:#d7b7b2}.voice-status,.voice-privacy{font-size:14px;line-height:1.6;color:var(--muted);margin:6px 0}.voice-preview{font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere;max-height:100px;overflow:auto;margin:6px 0}.note-field textarea{margin-top:7px}
-#historyTable{min-width:800px}#historyTable th:nth-child(3){width:150px}#historyTable th:nth-child(4){width:auto}#historyTable th:nth-child(5){width:100px}.history-student{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.history{min-width:700px}.history th:first-child{width:165px}#historyTable{min-width:850px}#historyTable th:nth-child(3){width:150px}#historyTable th:nth-child(4){width:auto}#historyTable th:nth-child(5){width:100px}.history-student{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -546,8 +546,14 @@ function openForm(key,id=null){
 function allHistoryRows(){
  return Object.entries(records).flatMap(([key,items])=>{const [date,pi]=key.split('|');return items.map(r=>({...r,key,date,pi:+pi}));}).sort((a,b)=>b.date.localeCompare(a.date)||a.pi-b.pi);
 }
+function recordDateLabel(date){
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(date||''))return date||'';
+ const d=new Date(date+'T12:00:00'),[year,month,day]=date.split('-').map(Number);
+ if(d.getFullYear()!==year||d.getMonth()+1!==month||d.getDate()!==day)return date;
+ return date+'（'+'日一二三四五六'[d.getDay()]+'）';
+}
 function recordRows(rows,showStudent=false){
- return '<thead><tr><th>日期</th><th>節次</th>'+(showStudent?'<th>學生姓名</th>':'')+'<th>工作摘要</th><th>狀態</th><th>詳細</th></tr></thead><tbody>'+(rows.length?rows.map(r=>'<tr><td>'+esc(r.date)+'</td><td>'+esc(PERIODS[r.pi]?.[0]||'')+'</td>'+(showStudent?'<td><span class="history-student" title="'+esc(r.student?.trim()||'未選擇')+'">'+esc(r.student?.trim()||'未選擇')+'</span></td>':'')+'<td><span class="row-summary">'+esc(r.task||'工作紀錄')+'</span></td><td>'+light(r)+stateText(r)+'</td><td><button class="tiny" data-view-key="'+esc(r.key)+'" data-view-id="'+esc(r.id)+'">查看紀錄</button></td></tr>').join(''):'<tr><td colspan="'+(showStudent?6:5)+'">尚無符合紀錄</td></tr>')+'</tbody>';
+ return '<thead><tr><th>日期</th><th>節次</th>'+(showStudent?'<th>學生姓名</th>':'')+'<th>工作摘要</th><th>狀態</th><th>詳細</th></tr></thead><tbody>'+(rows.length?rows.map(r=>'<tr><td>'+esc(recordDateLabel(r.date))+'</td><td>'+esc(PERIODS[r.pi]?.[0]||'')+'</td>'+(showStudent?'<td><span class="history-student" title="'+esc(r.student?.trim()||'未選擇')+'">'+esc(r.student?.trim()||'未選擇')+'</span></td>':'')+'<td><span class="row-summary">'+esc(r.task||'工作紀錄')+'</span></td><td>'+light(r)+stateText(r)+'</td><td><button class="tiny" data-view-key="'+esc(r.key)+'" data-view-id="'+esc(r.id)+'">查看紀錄</button></td></tr>').join(''):'<tr><td colspan="'+(showStudent?6:5)+'">尚無符合紀錄</td></tr>')+'</tbody>';
 }
 function wireRecordRows(table){table.querySelectorAll('[data-view-id]').forEach(button=>button.onclick=()=>showRecord(button.dataset.viewKey,button.dataset.viewId));}
 function showRecord(key,id){
