@@ -94,6 +94,8 @@
 :root{--bg:#f1eeeb;--card:#fbf9f6;--ink:#3f4946;--muted:#68716d;--line:#d7d1cc;--accent:#60776d;--accent2:#bcaaa3;--class:#e7ede8;--empty:#f5f0eb;--done:#e4ebe1;--shadow:0 8px 26px rgba(71,76,71,.06)}
 .tab.active{background:#60776d;border-color:#60776d;color:#fff}.primary{background:#60776d;border-color:#60776d;color:#fff}thead th,.history th,.course-grid .head{background:#e7e6e1}.period{background:#efeee8}.slot-summary{background:#ede5df;border-color:#d5c6bd}.slot-summary:hover{background:#e6dcd5}.view-link{color:#536c61}.notice{background:#e6eceb;border-color:#cdd8d5;color:#52665f}.option-group,.option-item{background:#efede8}.work-item{background:#faf8f4}.light.red{background:#b14b50;box-shadow:0 0 5px #b14b5045}.light.green{background:#58765f}.course-progress .cp-status.not-started-status{color:#a24449;background:#f4e8e5;border-color:#d7b7b2}.course-progress .cp-status.done-status{background:#e4ebe1}.danger,#formError{color:#a24449}
 .course-progress textarea{height:40px;min-height:40px;max-height:40px;overflow:hidden;resize:none;white-space:pre;font-size:16px;line-height:24px;padding:7px;margin:5px 0 8px}.course-progress label{margin-top:8px}.course-progress .cp-status{margin-top:5px;min-height:40px}.course-stamp{font-size:12px}
+.note-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.note-heading button{min-height:40px;font-size:14px}.note-heading button[aria-pressed="true"]{color:#a24449;background:#f4e8e5;border-color:#d7b7b2}.voice-status,.voice-privacy{font-size:14px;line-height:1.6;color:var(--muted);margin:6px 0}.voice-preview{font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere;max-height:100px;overflow:auto;margin:6px 0}.note-field textarea{margin-top:7px}
+#historyTable{min-width:800px}#historyTable th:nth-child(3){width:150px}#historyTable th:nth-child(4){width:auto}#historyTable th:nth-child(5){width:100px}.history-student{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -358,7 +360,78 @@ function persist(next,templates=customTemplates){
  }catch{alert('儲存失敗，可能是瀏覽器空間不足或禁止儲存。原有紀錄未被清除，請先匯出備份。');return false}
 }
 function refreshRecords(){renderSchedule();renderHistory();renderStudentLogs();}
+let noteVoice=null;
+function stopNoteVoice(){if(noteVoice){noteVoice.dispose();noteVoice=null;}}
+function setupNoteVoice(){
+ const field=document.getElementById('workNote'),button=document.getElementById('noteVoiceButton'),status=document.getElementById('noteVoiceStatus'),preview=document.getElementById('noteVoicePreview');
+ const Recognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+ let recognition=null,disposed=false,agreed=false,stopping=false,hasText=false,stopTimer=null;
+ const idle=()=>{button.textContent='🎤 語音輸入';button.setAttribute('aria-pressed','false');button.disabled=false;};
+ const finish=()=>{if(stopTimer)window.clearTimeout(stopTimer);stopTimer=null;recognition=null;stopping=false;idle();};
+ function stop(){
+  if(!recognition||stopping)return;
+  stopping=true;button.disabled=true;status.textContent='正在整理最後一句，請稍候…';
+  const current=recognition;
+  stopTimer=window.setTimeout(()=>{if(recognition!==current)return;finish();try{current.abort();}catch{}status.textContent='語音服務未回應，已停止。已輸入的文字保留，請檢查後儲存。';},5000);
+  try{current.stop();}catch{finish();try{current.abort();}catch{}status.textContent='已停止語音，請檢查文字後儲存。';}
+ }
+ const controller={busy:()=>!!recognition,stop,dispose:()=>{
+  if(disposed)return;disposed=true;const current=recognition;finish();
+  if(current){current.onresult=current.onend=current.onerror=current.onstart=null;try{current.abort();}catch{}}
+  status.textContent='語音已停止；文字尚未儲存。';button.onclick=null;
+ }};
+ noteVoice=controller;
+ if(!Recognition||window.isSecureContext===false){
+  button.disabled=true;status.textContent='此瀏覽器無法使用網頁語音輸入；仍可打字，或使用裝置鍵盤的聽寫功能。';return;
+ }
+ status.textContent='中文（臺灣）｜辨識後接在原文後方，確認文字再儲存。';
+ button.onclick=()=>{
+  if(disposed)return;
+  if(recognition){stop();return;}
+  if(!agreed){
+   if(!confirm('語音辨識可能將您的聲音傳送至瀏覽器供應商的線上服務。本網站不保存錄音；辨識文字要按儲存才會存入此瀏覽器。請避免口述學生姓名、身分證號及可識別個人的敏感資訊。是否繼續啟用麥克風？'))return;
+   agreed=true;
+  }
+  let current;
+  try{current=new Recognition();}catch{status.textContent='無法啟用語音辨識，請使用裝置聽寫或手動輸入。';return;}
+  recognition=current;hasText=false;stopping=false;preview.textContent='';preview.hidden=true;
+  current.lang='zh-TW';current.continuous=true;current.interimResults=true;current.maxAlternatives=1;
+  const applied=new Set();
+  button.textContent='■ 停止語音';button.setAttribute('aria-pressed','true');status.textContent='正在啟用麥克風，請允許瀏覽器使用…';
+  current.onstart=()=>{if(!disposed&&recognition===current&&!stopping)status.textContent='正在聆聽…說完請按「停止語音」。';};
+  current.onresult=event=>{
+   if(disposed||recognition!==current)return;
+   let interim='';
+   for(let i=0;i<event.results.length;i++){
+    const result=event.results[i],text=result[0]?.transcript||'';
+    if(!result.isFinal){interim+=text;continue;}
+    if(applied.has(i)||!text.trim())continue;
+    const prefix=!hasText&&field.value&&!field.value.endsWith('\n')?'\n':'';
+    const addition=prefix+text;
+    if(field.value.length+addition.length>10000){
+     preview.textContent='未加入的文字：'+text;preview.hidden=false;
+     finish();try{current.abort();}catch{}
+     status.textContent='已達欄位字數上限，語音已停止。請先複製下方未加入的文字；原文不會刪除。';return;
+    }
+    field.value+=addition;hasText=true;applied.add(i);field.scrollTop=field.scrollHeight;
+   }
+   preview.textContent=interim?'辨識中（尚未加入）：'+interim:'';preview.hidden=!interim;
+  };
+  current.onerror=event=>{
+   if(disposed||recognition!==current)return;
+   const messages={'not-allowed':'麥克風權限未開啟。請在此網站的權限設定允許麥克風後再試。','service-not-allowed':'此瀏覽器或裝置未允許語音辨識，請使用裝置聽寫或手動輸入。','audio-capture':'找不到可用的麥克風，請確認已連接且沒有被其他程式占用。','no-speech':'沒有聽到語音，請靠近麥克風後重試。','network':'語音服務連線失敗，請確認網路後重試。','language-not-supported':'此瀏覽器不支援臺灣中文辨識，請使用裝置聽寫或手動輸入。','aborted':'語音已停止。'};
+   finish();try{current.abort();}catch{}
+   status.textContent=(messages[event.error]||'語音辨識暫時無法使用，請重試或手動輸入。')+' 原有文字保留。';
+  };
+  current.onend=()=>{
+   if(disposed||recognition!==current)return;
+   finish();status.textContent=hasText?'語音已停止，請檢查辨識文字後按「儲存這一件」。':'語音已停止，尚未加入文字，可重試或手動輸入。';
+  };
+  try{current.start();}catch{finish();status.textContent='無法啟動麥克風，請確認網站權限，或改用裝置聽寫。';}
+ };
+}
 function openDialog(title,side=false){
+ stopNoteVoice();
  document.getElementById('dialogTitle').textContent=title;
  workDialog.classList.toggle('side-record',side);
  if(!workDialog.open)workDialog.showModal();
@@ -423,12 +496,13 @@ function openForm(key,id=null){
  +'<label>學生（選填）<select id="workStudent"><option value="">不選擇</option>'+[...new Set([...CASE_STUDENTS,...(r.student?[r.student]:[])])].map(s=>'<option '+(r.student===s?'selected':'')+'>'+esc(s)+'</option>').join('')+'</select></label>'
  +'<label>對象（選填）<select id="workTarget"><option value="">不選擇</option>'+[...new Set(['學生本人','家長','導師','任課教師','自行填寫',...(r.targetType?[r.targetType]:[])])].map(s=>'<option '+(r.targetType===s?'selected':'')+'>'+esc(s)+'</option>').join('')+'</select></label>'
  +'<label class="full" id="customTargetField" '+(r.targetType==='自行填寫'?'':'hidden')+'>自訂對象<input id="workCustomTarget" value="'+esc(r.customTarget||'')+'"></label>'
- +'<label class="full">完整紀錄／備註<textarea id="workNote" maxlength="10000">'+esc(r.note||'')+'</textarea></label>'
+ +'<div class="full note-field"><div class="note-heading"><label for="workNote">完整紀錄／備註</label><button type="button" id="noteVoiceButton" aria-pressed="false" aria-controls="workNote" aria-describedby="noteVoiceStatus noteVoicePrivacy">🎤 語音輸入</button></div><textarea id="workNote" maxlength="10000" aria-describedby="noteVoiceStatus">'+esc(r.note||'')+'</textarea><p id="noteVoiceStatus" class="voice-status" role="status" aria-live="polite"></p><p id="noteVoicePreview" class="voice-preview" hidden></p><details class="voice-privacy"><summary>語音與隱私</summary><p id="noteVoicePrivacy">辨識可能由瀏覽器的線上服務處理，請避免口述可識別學生的敏感資訊。本網站不保存錄音；文字需按儲存才會保存。若改用其他瀏覽器，原有紀錄不會自動同步。</p></details></div>'
  +'<label>完成狀態<select id="workStatus">'+(id&&!r.status?'<option value="">未設定（保留）</option>':'')+'<option value="未完成" '+(isPending(r)?'selected':'')+'>🔴 未完成</option><option value="已完成" '+(isDone(r)?'selected':'')+'>已完成</option></select></label>'
  +'<label class="full check" id="rememberField"><input id="rememberWork" type="checkbox">保留為常用內容</label></div>'
  +(id?'<p class="help">原紀錄不會自動重新分類；可保留原分類，或改選新分類。</p>':'')
  +'<p id="formError" role="alert"></p><footer class="detail-actions"><button type="button" id="cancelWork">取消</button><button class="primary" type="submit">儲存這一件</button></footer></form>';
  const cat=document.getElementById('workCategory'),sub=document.getElementById('workSubcategory'),taskField=document.getElementById('workTask');
+ setupNoteVoice();
  function updateHint(){taskField.placeholder=cat.value==='自行輸入'?'請填寫工作內容':sub.value?'可補充內容；留白會儲存為「'+cat.value+'：'+sub.value+'」':'選擇項目後可補充內容';}
  function updateSub(selected=''){
   const items=[...(WORK_GROUPS.find(g=>g.name===cat.value)?.items||[])];
@@ -445,9 +519,10 @@ function openForm(key,id=null){
  sub.onchange=updateHint;updateSub(oldSubcategory);
  document.getElementById('workTemplate').onchange=e=>{if(e.target.value)taskField.value=e.target.value};
  document.getElementById('workTarget').onchange=e=>document.getElementById('customTargetField').hidden=e.target.value!=='自行填寫';
- document.getElementById('cancelWork').onclick=()=>listFor(key).length?openSlot(key):workDialog.close();
+ document.getElementById('cancelWork').onclick=()=>{stopNoteVoice();if(listFor(key).length)openSlot(key);else workDialog.close();};
  document.getElementById('workForm').onsubmit=event=>{
   event.preventDefault();const get=id=>document.getElementById(id).value.trim();
+  if(noteVoice?.busy()){noteVoice.stop();document.getElementById('formError').textContent='請等語音停止、確認文字後，再按一次儲存。';return;}
   const category=get('workCategory'),subcategory=category==='自行輸入'?'':get('workSubcategory');
   const unchanged=id&&category===oldCategory&&subcategory===oldSubcategory;
   const subject=unchanged?(r.subject||''):category==='備課'?subcategory:'';
@@ -472,7 +547,7 @@ function allHistoryRows(){
  return Object.entries(records).flatMap(([key,items])=>{const [date,pi]=key.split('|');return items.map(r=>({...r,key,date,pi:+pi}));}).sort((a,b)=>b.date.localeCompare(a.date)||a.pi-b.pi);
 }
 function recordRows(rows,showStudent=false){
- return '<thead><tr><th>日期</th><th>節次</th><th>工作摘要</th><th>狀態</th><th>詳細</th></tr></thead><tbody>'+(rows.length?rows.map(r=>'<tr><td>'+esc(r.date)+'</td><td>'+esc(PERIODS[r.pi]?.[0]||'')+'</td><td><span class="row-summary">'+esc((showStudent&&r.student?.trim()?r.student.trim()+'｜':'')+(r.task||'工作紀錄'))+'</span></td><td>'+light(r)+stateText(r)+'</td><td><button class="tiny" data-view-key="'+esc(r.key)+'" data-view-id="'+esc(r.id)+'">查看紀錄</button></td></tr>').join(''):'<tr><td colspan="5">尚無符合紀錄</td></tr>')+'</tbody>';
+ return '<thead><tr><th>日期</th><th>節次</th>'+(showStudent?'<th>學生姓名</th>':'')+'<th>工作摘要</th><th>狀態</th><th>詳細</th></tr></thead><tbody>'+(rows.length?rows.map(r=>'<tr><td>'+esc(r.date)+'</td><td>'+esc(PERIODS[r.pi]?.[0]||'')+'</td>'+(showStudent?'<td><span class="history-student" title="'+esc(r.student?.trim()||'未選擇')+'">'+esc(r.student?.trim()||'未選擇')+'</span></td>':'')+'<td><span class="row-summary">'+esc(r.task||'工作紀錄')+'</span></td><td>'+light(r)+stateText(r)+'</td><td><button class="tiny" data-view-key="'+esc(r.key)+'" data-view-id="'+esc(r.id)+'">查看紀錄</button></td></tr>').join(''):'<tr><td colspan="'+(showStudent?6:5)+'">尚無符合紀錄</td></tr>')+'</tbody>';
 }
 function wireRecordRows(table){table.querySelectorAll('[data-view-id]').forEach(button=>button.onclick=()=>showRecord(button.dataset.viewKey,button.dataset.viewId));}
 function showRecord(key,id){
@@ -499,7 +574,11 @@ function renderOptions(){
  document.getElementById('optionList').innerHTML=WORK_GROUPS.map(g=>'<details class="option-group"><summary>'+esc(g.name)+'</summary>'+(g.items.length?'<ul>'+g.items.map(t=>'<li>'+esc(t)+'</li>').join('')+'</ul>':'<p>直接填寫工作內容，也可選用已儲存的常用內容。</p>')+'</details>').join('')+'<details class="option-group"><summary>自訂與原有選項</summary>'+legacy+customTemplates.map(t=>'<p>'+esc(t.category+' › '+t.subcategory+' › '+t.task)+'</p>').join('')+'</details>';
  document.querySelectorAll('#optionList [data-i]').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;if(!confirm('停用這個選項？已儲存的紀錄會保留。'))return;const next=options.filter((_,j)=>j!==i);try{localStorage.setItem('wt_options',JSON.stringify(next));options=next;renderOptions();}catch{alert('未能儲存，選項仍保留。')}});
 }
-document.getElementById('closeWorkDialog').onclick=()=>workDialog.close();
+document.getElementById('closeWorkDialog').onclick=()=>{stopNoteVoice();workDialog.close();};
+workDialog.addEventListener('close',stopNoteVoice);
+workDialog.addEventListener('cancel',stopNoteVoice);
+window.addEventListener('pagehide',stopNoteVoice);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopNoteVoice();else if(workDialog.open&&document.getElementById('workNote'))setupNoteVoice();});
 workDialog.addEventListener('click',event=>{if(event.target===workDialog){const box=workDialog.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)workDialog.close();}});
 
 function switchTab(id){document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===id));if(id==='historyPanel')renderHistory();if(id==='studentsPanel')renderStudentMaster();if(id==='studentLogsPanel')renderStudentLogs();if(id==='coursesPanel')renderCourseGrid()}
