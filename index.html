@@ -87,12 +87,13 @@
 [hidden]{display:none!important}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #426854;outline-offset:2px}button:disabled{opacity:.45;cursor:not-allowed}.light{display:inline-block;flex:none;width:10px;height:10px;border-radius:50%;margin-right:6px;background:#88938c}.light.red{background:#d52f32;box-shadow:0 0 6px #d52f3260}.light.green{background:#31814d}.add-work{width:100%;margin-top:8px;min-height:44px;border-style:dashed}.slot-summary{display:flex;flex-direction:column;gap:8px;width:100%;padding:10px;text-align:left;margin-top:8px;background:#fff5db;font-size:14px;min-height:128px}.slot-summary strong{font-size:14px}.short-task{display:flex;align-items:baseline;min-width:0}.short-task>span:last-child{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere;line-height:1.5}.view-link{color:#46604e;font-weight:700;font-size:14px}.course-progress summary{cursor:pointer;font-size:14px;line-height:1.6}.course-progress label{font-size:14px}.course-progress input,.course-progress select{font-size:14px}.history{table-layout:fixed;min-width:640px}.history th:first-child{width:110px}.history th:nth-child(2){width:85px}.history th:nth-child(4){width:100px}.history th:last-child{width:110px}.history td{vertical-align:middle;white-space:nowrap;height:50px}.row-summary{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:16px}.history .tiny{font-size:14px;min-height:38px}#studentLogsPanel .table-wrap,#historyPanel .table-wrap{max-height:60vh;overflow:auto}.pagination{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin-top:12px}.option-group{background:#faf7f1;padding:14px;border:1px solid var(--line);border-radius:12px;min-width:0}.option-group summary{font-weight:700;cursor:pointer;font-size:16px}.option-group h3{font-size:14px;margin:14px 0 8px}.option-group ul{padding-left:20px;font-size:14px;line-height:1.8}.option-group p{overflow-wrap:anywhere;font-size:14px}
 #workDialog{border:1px solid var(--line);border-radius:18px;width:min(660px,calc(100vw - 24px));max-height:calc(100dvh - 24px);padding:22px;background:var(--card);color:var(--ink);overflow-y:auto;box-shadow:var(--shadow)}#workDialog::backdrop{background:#15281d80}.dialog-head{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:18px}.dialog-head h2{font-size:20px;margin:0}.dialog-head button{flex:none;min-height:44px}.work-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.work-fields label{display:flex;flex-direction:column;gap:7px;font-size:14px;font-weight:700;min-width:0}.work-fields .full{grid-column:1/-1}.work-fields .check{flex-direction:row;align-items:center}.work-fields input,.work-fields select,.work-fields textarea{font-size:16px}.work-fields textarea{min-height:88px}.work-fields input[type=checkbox],.detail-actions input[type=checkbox]{width:20px;height:20px;accent-color:#476952}.detail-top,.detail-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between}.detail-actions{margin-top:16px}.detail-actions label{margin-right:auto;display:flex;align-items:center;gap:7px;font-size:14px}.detail-list{display:grid;gap:14px;margin-top:16px}.work-item{border:1px solid var(--line);border-radius:12px;padding:14px;background:white}.work-item h3{font-size:16px;margin:0;line-height:1.6;overflow-wrap:anywhere}.meta{color:#636d64;font-size:14px;line-height:1.6;overflow-wrap:anywhere}.full-text{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.8;font-size:16px}#formError{color:#b22328;font-size:14px}#workDialog.side-record{margin:12px 12px 12px auto;height:calc(100dvh - 24px);width:min(540px,calc(100vw - 24px));max-height:none}
 @media(max-width:700px){.work-fields{grid-template-columns:1fr}.work-fields .full{grid-column:auto}#workDialog{padding:16px}.history{min-width:580px}.history th:first-child{width:100px}.history th:nth-child(2){width:70px}.history th:nth-child(4){width:88px}.history th:last-child{width:100px}#workDialog.side-record{margin:auto;max-height:calc(100dvh - 24px);height:auto}}
-@media print{dialog{display:none!important}.slot-summary,.add-work{border:0}.add-work,.view-link{display:none!important}.slot-summary{min-height:0;background:transparent}.course-progress:not([open])>*:not(summary){display:none}}
+@media print{dialog{display:none!important}.slot-summary,.add-work{border:0}.add-work,.view-link{display:none!important}.slot-summary{min-height:0;background:transparent}.course-progress textarea{background:transparent;border:0;resize:none}}
 
 
 /* Soft Morandi palette, with distinct task status indicators. */
 :root{--bg:#f1eeeb;--card:#fbf9f6;--ink:#3f4946;--muted:#68716d;--line:#d7d1cc;--accent:#60776d;--accent2:#bcaaa3;--class:#e7ede8;--empty:#f5f0eb;--done:#e4ebe1;--shadow:0 8px 26px rgba(71,76,71,.06)}
 .tab.active{background:#60776d;border-color:#60776d;color:#fff}.primary{background:#60776d;border-color:#60776d;color:#fff}thead th,.history th,.course-grid .head{background:#e7e6e1}.period{background:#efeee8}.slot-summary{background:#ede5df;border-color:#d5c6bd}.slot-summary:hover{background:#e6dcd5}.view-link{color:#536c61}.notice{background:#e6eceb;border-color:#cdd8d5;color:#52665f}.option-group,.option-item{background:#efede8}.work-item{background:#faf8f4}.light.red{background:#b14b50;box-shadow:0 0 5px #b14b5045}.light.green{background:#58765f}.course-progress .cp-status.not-started-status{color:#a24449;background:#f4e8e5;border-color:#d7b7b2}.course-progress .cp-status.done-status{background:#e4ebe1}.danger,#formError{color:#a24449}
+.course-progress textarea{min-height:64px;overflow:hidden;resize:vertical;font-size:16px;line-height:1.5;margin:5px 0 8px}.course-progress label{margin-top:8px}.course-progress .cp-status{margin-top:5px;min-height:40px}.course-stamp{font-size:12px}
 </style>
 </head>
 <body>
@@ -122,14 +123,14 @@
   </div>
 
   <section id="schedulePanel" class="panel active">
-    <div class="notice">每節可記多件工作，點摘要查看全部。未完成亮紅燈；學生與對象都可不選。固定課程的進度、小考與作業可展開填寫。</div>
+    <div class="notice">有課的格子直接填寫上課進度、作業與下次小考；空堂可新增多件工作。先前有課時段的工作紀錄仍保留在「歷史紀錄」與「學生處理紀錄」。</div>
     <div class="card table-wrap"><table id="scheduleTable"><caption>課表載入中；請使用可執行 JavaScript 的瀏覽器。</caption></table></div>
   </section>
 
   <section id="optionsPanel" class="panel">
     <div class="card section">
       <h2>工作選項</h2>
-      <div class="help">先選大類、小分類，再選具體事項。這些是範本，不會自動變成行程；新增紀錄時也可自訂分類與內容。</div>
+      <div class="help">空堂先選工作分類，再選項目；其他工作選「自行輸入」。學生與對象可不選，原有紀錄與自訂內容仍保留。</div>
       <div class="add-row"><input id="newOption" placeholder="例如：填寫轉銜資料"><button class="primary" id="addOption">新增</button></div>
       <div id="optionList" class="option-list"></div>
     </div>
@@ -324,8 +325,14 @@ function buildStudentLogFilter(){
   sel.innerHTML='<option value="">請選擇學生</option>'+CASE_STUDENTS.map(s=>`<option value="${esc(s)}">${esc(s)}</option>`).join('');
 }
 
-const WORK_GROUPS=[{"name":"需求評估","groups":[{"name":"個案與計畫","items":["個案建檔","需求評估","IEP 擬定與檢討"]},{"name":"環境與資源","items":["環境評估與調整","輔具申請與訓練","轉銜與升學"]}]},{"name":"教學備課","groups":[{"name":"課程準備","items":["課程規劃","教材與評量調整","備課與共備"]},{"name":"教學與評量","items":["個別／小組教學","學習策略教學","學習紀錄與評量"]}]},{"name":"個別輔導","groups":[{"name":"晤談與適應","items":["個別晤談","適性輔導","生活適應"]},{"name":"學習與情緒","items":["學習輔導","情緒調節","人際互動"]}]},{"name":"諮詢合作","groups":[{"name":"親師諮詢","items":["家長聯繫","特教諮詢","課程調整諮詢"]},{"name":"團隊合作","items":["專業與巡迴合作","同儕支持與訓練","助理人員協作"]}]},{"name":"入班支援","groups":[{"name":"課堂支持","items":["入班觀察","入班協助","課堂參與支持"]},{"name":"行為支持","items":["行為觀察與評估","行為介入與追蹤","突發事件處理"]}]},{"name":"行政成長","groups":[{"name":"行政與宣導","items":["資料與會議紀錄","服務與資源申請","特教宣導"]},{"name":"進修與反思","items":["研習進修","觀課與案例討論","教學檢討與改進"]}]}];
-const BUILTIN=WORK_GROUPS.flatMap(g=>g.groups.flatMap(s=>s.items.map(task=>({category:g.name,subcategory:s.name,task}))));
+const WORK_GROUPS=[
+ {name:'備課',items:['一英','二英','三國','社技','職業']},
+ {name:'個案管理',items:['輔導紀錄','IEP','學期目標']},
+ {name:'晤談',items:['學生','導師','家長','任課教師']},
+ {name:'鑑定',items:['施測','撰寫報告','蒐集整理資料','入班觀察']},
+ {name:'自行輸入',items:[]}
+];
+const BUILTIN=WORK_GROUPS.flatMap(g=>g.items.map(subcategory=>({category:g.name,subcategory,task:g.name+'：'+subcategory})));
 const STORE_KEY='wt_records_v2';
 const savedV2=readData(STORE_KEY,null);
 if(savedV2&&(savedV2.version!==2||!savedV2.slots||typeof savedV2.slots!=='object'))throw new Error('工作紀錄格式無法辨識，原始資料未變更。');
@@ -358,6 +365,7 @@ function openDialog(title,side=false){
  else document.getElementById('dialogTitle').focus();
 }
 function slotTitle(key){const [date,pi]=key.split('|');return date+'・'+(PERIODS[+pi]?.[0]||'原節次');}
+function resizeCourseField(field){field.style.height='auto';field.style.height=Math.max(64,field.scrollHeight||0)+'px';}
 function renderSchedule(){
  let html='<thead><tr><th class="period">節次</th>'+DAYS.map((d,i)=>'<th>'+shortDate(dateFor(i))+'（'+d+'）</th>').join('')+'</tr></thead><tbody>';
  PERIODS.forEach((p,pi)=>{
@@ -367,20 +375,20 @@ function renderSchedule(){
    html+='<td class="cell '+(c?'class-cell':'empty-cell')+'" '+(c?'data-course-key="'+k+'"':'')+'>';
    if(c){
     const cp=courseProgress[k]||{status:'尚未'};
-    html+='<div class="class-title">'+esc(c.t)+'</div><div class="room">'+esc(c.r||'')+'</div><details class="course-progress"><summary>'+ (cp.status==='完成'?'課程已完成':'🔴 課程尚未完成')+'・查看進度</summary><label>課程進度狀態</label><select class="cp-status '+(cp.status==='完成'?'done-status':'not-started-status')+'"><option '+(cp.status==='尚未'?'selected':'')+'>尚未</option><option '+(cp.status==='完成'?'selected':'')+'>完成</option></select><label>上課進度</label><input class="cp-lesson" value="'+esc(cp.lesson||'')+'"><label>小考</label><input class="cp-quiz" value="'+esc(cp.quiz||'')+'"><label>作業</label><input class="cp-homework" value="'+esc(cp.homework||'')+'"><div class="course-stamp">'+esc(cp.updated||'尚未紀錄')+'</div></details>';
+    html+='<div class="class-title">'+esc(c.t)+'</div><div class="room">'+esc(c.r||'')+'</div><div class="course-progress"><label>課程進度狀態<select aria-label="'+esc(slotTitle(k)+' 課程進度狀態')+'" class="cp-status '+(cp.status==='完成'?'done-status':'not-started-status')+'"><option '+(cp.status==='尚未'?'selected':'')+'>尚未</option><option '+(cp.status==='完成'?'selected':'')+'>完成</option></select></label><label>上課進度<textarea rows="2" class="cp-lesson" placeholder="填寫上課進度">'+esc(cp.lesson||'')+'</textarea></label><label>作業<textarea rows="2" class="cp-homework" placeholder="填寫作業">'+esc(cp.homework||'')+'</textarea></label><label>下次小考<textarea rows="2" class="cp-quiz" placeholder="填寫下次小考範圍或日期">'+esc(cp.quiz||'')+'</textarea></label><div class="course-stamp">'+esc(cp.updated||'尚未紀錄')+'</div></div>';
    }
-   if(items.length){
+   if(!c&&items.length){
     html+='<button class="slot-summary" data-open-slot="'+esc(k)+'"><strong>'+(summary.pending?'<span class="light red"></span>':'')+summary.label+'</strong>';
     summary.sorted.slice(0,2).forEach(r=>{html+='<span class="short-task">'+light(r)+'<span>'+esc((r.task||r.note||'工作紀錄').slice(0,50))+'</span></span>';});
     html+='<span class="view-link">查看全部／新增一件 →</span></button>';
-   }else html+='<button class="add-work" data-open-slot="'+esc(k)+'">＋新增紀錄</button>';
+   }else if(!c)html+='<button class="add-work" data-open-slot="'+esc(k)+'">＋新增紀錄</button>';
    html+='</td>';
   });html+='</tr>';
  });
  document.getElementById('scheduleTable').innerHTML=html+'</tbody>';updateYearBanner();
  document.querySelectorAll('[data-open-slot]').forEach(button=>button.onclick=()=>openSlot(button.dataset.openSlot));
  document.querySelectorAll('[data-course-key]').forEach(td=>['cp-status','cp-lesson','cp-quiz','cp-homework'].forEach(cls=>{
-  const el=td.querySelector('.'+cls);el.addEventListener(cls==='cp-status'?'change':'input',()=>{saveCourseProgress(td);td.querySelector('summary').textContent=(courseProgress[td.dataset.courseKey].status==='完成'?'課程已完成':'🔴 課程尚未完成')+'・查看進度';});
+  const el=td.querySelector('.'+cls);if(cls!=='cp-status')resizeCourseField(el);el.addEventListener(cls==='cp-status'?'change':'input',()=>{if(cls!=='cp-status')resizeCourseField(el);saveCourseProgress(td);});
  }));
 }
 function openSlot(key){
@@ -398,31 +406,60 @@ function openSlot(key){
   if(persist(next)){refreshRecords();if(listFor(key).length)openSlot(key);else workDialog.close();}
  });
 }
-function templateOptions(){return [...BUILTIN,...customTemplates,...options.map(task=>({category:'原有選項',subcategory:'自訂工作',task}))];}
+function templateOptions(){return [...customTemplates,...options.map(task=>({category:'自行輸入',subcategory:'',task}))];}
 function openForm(key,id=null){
  activeKey=key;editingId=id;const r=id?listFor(key).find(item=>item.id===id):{status:'未完成'};
+ if(!r)return;
  openDialog((id?'編輯':'新增')+'工作・'+slotTitle(key));
- const subjects=[...new Set(courses.flat().filter(Boolean).map(c=>c.t))];
- if(r.subject&&!subjects.includes(r.subject))subjects.push(r.subject);
- dialogBody.innerHTML='<form id="workForm"><div class="work-fields"><label>① 工作大類<input id="workCategory" list="categoryChoices" maxlength="100" placeholder="選擇或自行輸入" value="'+esc(r.category||'')+'"><datalist id="categoryChoices"></datalist></label><label>② 小分類<input id="workSubcategory" list="subcategoryChoices" maxlength="100" placeholder="選擇或自行輸入" value="'+esc(r.subcategory||'')+'"><datalist id="subcategoryChoices"></datalist></label><label class="full">③ 具體事項<select id="workTemplate"><option value="">選用範本或自行填寫</option></select></label><label class="full">工作內容<textarea id="workTask" maxlength="10000" placeholder="選範本後可修改，也可直接填寫">'+esc(r.task||'')+'</textarea></label><label class="full check"><input type="checkbox" id="isPrep" '+(r.subject?'checked':'')+'>這件工作是備課</label><label class="full" id="subjectField" '+(!r.subject?'hidden':'')+'>備課科目<select id="workSubject"><option value="">請選擇目前授課科目</option>'+subjects.map(s=>'<option '+(s===r.subject?'selected':'')+'>'+esc(s)+'</option>').join('')+'</select></label><label>學生（選填）<select id="workStudent"><option value="">不選擇</option>'+[...new Set([...CASE_STUDENTS,...(r.student?[r.student]:[])])].map(s=>'<option '+(r.student===s?'selected':'')+'>'+esc(s)+'</option>').join('')+'</select></label><label>對象（選填）<select id="workTarget"><option value="">不選擇</option>'+['學生本人','家長','導師','自行填寫'].map(s=>'<option '+(r.targetType===s?'selected':'')+'>'+s+'</option>').join('')+'</select></label><label class="full" id="customTargetField" '+(r.targetType==='自行填寫'?'':'hidden')+'>自訂對象<input id="workCustomTarget" value="'+esc(r.customTarget||'')+'"></label><label class="full">完整紀錄／備註<textarea id="workNote" maxlength="10000">'+esc(r.note||'')+'</textarea></label><label>完成狀態<select id="workStatus">'+(id&&!r.status?'<option value="">未設定（保留）</option>':'')+'<option value="未完成" '+(isPending(r)?'selected':'')+'>🔴 未完成</option><option value="已完成" '+(isDone(r)?'selected':'')+'>已完成</option></select></label><label class="full check"><input id="rememberWork" type="checkbox">將這項事項與分類保留在選單</label></div>'+(id&&!r.category?'<p class="help">舊紀錄可保留未分類，不會自動猜測分類。</p>':'')+'<p id="formError" role="alert"></p><footer class="detail-actions"><button type="button" id="cancelWork">取消</button><button class="primary" type="submit">儲存這一件</button></footer></form>';
- const cat=document.getElementById('workCategory'),sub=document.getElementById('workSubcategory'),template=document.getElementById('workTemplate');
- document.getElementById('categoryChoices').innerHTML=[...new Set(templateOptions().map(t=>t.category))].map(c=>'<option value="'+esc(c)+'">').join('');
- function updateSub(){document.getElementById('subcategoryChoices').innerHTML=[...new Set(templateOptions().filter(t=>t.category===cat.value).map(t=>t.subcategory))].map(c=>'<option value="'+esc(c)+'">').join('');updateTasks();}
- function updateTasks(){template.innerHTML='<option value="">選用範本或自行填寫</option>'+[...new Set(templateOptions().filter(t=>t.category===cat.value&&t.subcategory===sub.value).map(t=>t.task))].map(task=>'<option>'+esc(task)+'</option>').join('');}
- cat.oninput=()=>{sub.value='';updateSub()};sub.oninput=updateTasks;updateSub();
- template.onchange=()=>{if(template.value)document.getElementById('workTask').value=template.value;if(template.value==='備課與共備'){document.getElementById('isPrep').checked=true;document.getElementById('subjectField').hidden=false;}};
- document.getElementById('isPrep').onchange=e=>document.getElementById('subjectField').hidden=!e.target.checked;
+ const oldCategory=r.category||'',oldSubcategory=r.subcategory||'';
+ const categories=WORK_GROUPS.map(g=>g.name);
+ if(oldCategory&&!categories.includes(oldCategory))categories.push(oldCategory);
+ const savedTasks=[...new Set(templateOptions().map(t=>t.task))];
+ dialogBody.innerHTML='<form id="workForm"><div class="work-fields">'
+ +'<label>工作分類<select id="workCategory"><option value="">'+(id&&!oldCategory?'未分類（保留）':'請選擇分類')+'</option>'+categories.map(c=>'<option value="'+esc(c)+'" '+(c===oldCategory?'selected':'')+'>'+esc(c)+(WORK_GROUPS.some(g=>g.name===c)?'':'（原紀錄）')+'</option>').join('')+'</select></label>'
+ +'<label id="subcategoryField">項目<select id="workSubcategory"></select></label>'
+ +'<label class="full" id="savedTaskField">常用內容（選填）<select id="workTemplate"><option value="">自行填寫</option>'+savedTasks.map(t=>'<option>'+esc(t)+'</option>').join('')+'</select></label>'
+ +'<label class="full">工作內容<textarea id="workTask" maxlength="10000">'+esc(r.task||'')+'</textarea></label>'
+ +(r.subject?'<p class="full help" id="legacySubject">原紀錄備課科目：'+esc(r.subject)+'（分類不變時保留）</p>':'')
+ +'<label>學生（選填）<select id="workStudent"><option value="">不選擇</option>'+[...new Set([...CASE_STUDENTS,...(r.student?[r.student]:[])])].map(s=>'<option '+(r.student===s?'selected':'')+'>'+esc(s)+'</option>').join('')+'</select></label>'
+ +'<label>對象（選填）<select id="workTarget"><option value="">不選擇</option>'+[...new Set(['學生本人','家長','導師','任課教師','自行填寫',...(r.targetType?[r.targetType]:[])])].map(s=>'<option '+(r.targetType===s?'selected':'')+'>'+esc(s)+'</option>').join('')+'</select></label>'
+ +'<label class="full" id="customTargetField" '+(r.targetType==='自行填寫'?'':'hidden')+'>自訂對象<input id="workCustomTarget" value="'+esc(r.customTarget||'')+'"></label>'
+ +'<label class="full">完整紀錄／備註<textarea id="workNote" maxlength="10000">'+esc(r.note||'')+'</textarea></label>'
+ +'<label>完成狀態<select id="workStatus">'+(id&&!r.status?'<option value="">未設定（保留）</option>':'')+'<option value="未完成" '+(isPending(r)?'selected':'')+'>🔴 未完成</option><option value="已完成" '+(isDone(r)?'selected':'')+'>已完成</option></select></label>'
+ +'<label class="full check" id="rememberField"><input id="rememberWork" type="checkbox">保留為常用內容</label></div>'
+ +(id?'<p class="help">原紀錄不會自動重新分類；可保留原分類，或改選新分類。</p>':'')
+ +'<p id="formError" role="alert"></p><footer class="detail-actions"><button type="button" id="cancelWork">取消</button><button class="primary" type="submit">儲存這一件</button></footer></form>';
+ const cat=document.getElementById('workCategory'),sub=document.getElementById('workSubcategory'),taskField=document.getElementById('workTask');
+ function updateHint(){taskField.placeholder=cat.value==='自行輸入'?'請填寫工作內容':sub.value?'可補充內容；留白會儲存為「'+cat.value+'：'+sub.value+'」':'選擇項目後可補充內容';}
+ function updateSub(selected=''){
+  const items=[...(WORK_GROUPS.find(g=>g.name===cat.value)?.items||[])];
+  if(selected&&!items.includes(selected))items.push(selected);
+  sub.innerHTML='<option value="">請選擇項目</option>'+items.map(s=>'<option value="'+esc(s)+'" '+(s===selected?'selected':'')+'>'+esc(s)+'</option>').join('');
+  document.getElementById('subcategoryField').hidden=cat.value==='自行輸入'||(!cat.value&&!selected);
+  sub.disabled=cat.value==='自行輸入';
+  document.getElementById('savedTaskField').hidden=cat.value!=='自行輸入'||!savedTasks.length;
+  document.getElementById('rememberField').hidden=cat.value!=='自行輸入';
+  document.getElementById('rememberWork').checked=false;
+  updateHint();
+ }
+ cat.onchange=()=>updateSub(cat.value===oldCategory?oldSubcategory:'');
+ sub.onchange=updateHint;updateSub(oldSubcategory);
+ document.getElementById('workTemplate').onchange=e=>{if(e.target.value)taskField.value=e.target.value};
  document.getElementById('workTarget').onchange=e=>document.getElementById('customTargetField').hidden=e.target.value!=='自行填寫';
  document.getElementById('cancelWork').onclick=()=>listFor(key).length?openSlot(key):workDialog.close();
  document.getElementById('workForm').onsubmit=event=>{
   event.preventDefault();const get=id=>document.getElementById(id).value.trim();
-  const category=get('workCategory'),subcategory=get('workSubcategory'),prep=document.getElementById('isPrep').checked,subject=prep?get('workSubject'):'',task=get('workTask')||(subject?'備課：'+subject:''),targetType=get('workTarget'),customTarget=targetType==='自行填寫'?get('workCustomTarget'):'',remember=document.getElementById('rememberWork').checked;
+  const category=get('workCategory'),subcategory=category==='自行輸入'?'':get('workSubcategory');
+  const unchanged=id&&category===oldCategory&&subcategory===oldSubcategory;
+  const subject=unchanged?(r.subject||''):category==='備課'?subcategory:'';
+  const task=get('workTask')||(category&&subcategory?category+'：'+subcategory:'');
+  const targetType=get('workTarget'),customTarget=targetType==='自行填寫'?get('workCustomTarget'):'',remember=category==='自行輸入'&&document.getElementById('rememberWork').checked;
+  const group=WORK_GROUPS.find(g=>g.name===category);
   let error='';
-  if(!task)error='請填寫工作內容。';
-  else if((!category||!subcategory)&&!(id&&!r.category&&!category&&!subcategory))error='請選擇大類與小分類，也可自行輸入。';
-  else if(prep&&!subject)error='請選擇備課科目。';
+  if(!unchanged&&(!group||(category!=='自行輸入'&&!group.items.includes(subcategory))))error='請選擇工作分類與項目。';
+  else if(!task)error='請填寫工作內容。';
   else if(targetType==='自行填寫'&&!customTarget)error='請填寫自訂對象。';
-  else if(remember&&(!category||!subcategory||task.length>500))error='保留選項需要完整分類，事項限 500 字。';
+  else if(remember&&task.length>500)error='常用內容限 500 字。';
   if(error){document.getElementById('formError').textContent=error;return}
   const next=clone(records),item={...r,id:id||crypto.randomUUID(),task,category,subcategory,subject,student:get('workStudent'),targetType,customTarget,note:get('workNote'),status:get('workStatus'),updated:new Date().toLocaleString('zh-TW',{hour12:false})};
   if(!next[key])next[key]=[];
@@ -460,7 +497,7 @@ function renderStudentLogs(){
 }
 function renderOptions(){
  const legacy=options.map((o,i)=>'<div class="option-item"><span>'+esc(o)+'</span><button class="tiny danger" data-i="'+i+'">停用</button></div>').join('');
- document.getElementById('optionList').innerHTML=WORK_GROUPS.map(g=>'<details class="option-group"><summary>'+esc(g.name)+'</summary>'+g.groups.map(s=>'<h3>'+esc(s.name)+'</h3><ul>'+s.items.map(t=>'<li>'+esc(t)+'</li>').join('')+'</ul>').join('')+'</details>').join('')+'<details class="option-group"><summary>自訂與原有選項</summary>'+legacy+customTemplates.map(t=>'<p>'+esc(t.category+' › '+t.subcategory+' › '+t.task)+'</p>').join('')+'</details>';
+ document.getElementById('optionList').innerHTML=WORK_GROUPS.map(g=>'<details class="option-group"><summary>'+esc(g.name)+'</summary>'+(g.items.length?'<ul>'+g.items.map(t=>'<li>'+esc(t)+'</li>').join('')+'</ul>':'<p>直接填寫工作內容，也可選用已儲存的常用內容。</p>')+'</details>').join('')+'<details class="option-group"><summary>自訂與原有選項</summary>'+legacy+customTemplates.map(t=>'<p>'+esc(t.category+' › '+t.subcategory+' › '+t.task)+'</p>').join('')+'</details>';
  document.querySelectorAll('#optionList [data-i]').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;if(!confirm('停用這個選項？已儲存的紀錄會保留。'))return;const next=options.filter((_,j)=>j!==i);try{localStorage.setItem('wt_options',JSON.stringify(next));options=next;renderOptions();}catch{alert('未能儲存，選項仍保留。')}});
 }
 document.getElementById('closeWorkDialog').onclick=()=>workDialog.close();
