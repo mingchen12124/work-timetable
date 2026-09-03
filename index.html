@@ -93,7 +93,7 @@
 /* Soft Morandi palette, with distinct task status indicators. */
 :root{--bg:#f1eeeb;--card:#fbf9f6;--ink:#3f4946;--muted:#68716d;--line:#d7d1cc;--accent:#60776d;--accent2:#bcaaa3;--class:#e7ede8;--empty:#f5f0eb;--done:#e4ebe1;--shadow:0 8px 26px rgba(71,76,71,.06)}
 .tab.active{background:#60776d;border-color:#60776d;color:#fff}.primary{background:#60776d;border-color:#60776d;color:#fff}thead th,.history th,.course-grid .head{background:#e7e6e1}.period{background:#efeee8}.slot-summary{background:#ede5df;border-color:#d5c6bd}.slot-summary:hover{background:#e6dcd5}.view-link{color:#536c61}.notice{background:#e6eceb;border-color:#cdd8d5;color:#52665f}.option-group,.option-item{background:#efede8}.work-item{background:#faf8f4}.light.red{background:#b14b50;box-shadow:0 0 5px #b14b5045}.light.green{background:#58765f}.course-progress .cp-status.not-started-status{color:#a24449;background:#f4e8e5;border-color:#d7b7b2}.course-progress .cp-status.done-status{background:#e4ebe1}.danger,#formError{color:#a24449}
-.course-progress textarea{min-height:64px;overflow:hidden;resize:vertical;font-size:16px;line-height:1.5;margin:5px 0 8px}.course-progress label{margin-top:8px}.course-progress .cp-status{margin-top:5px;min-height:40px}.course-stamp{font-size:12px}
+.course-progress textarea{height:40px;min-height:40px;max-height:40px;overflow:hidden;resize:none;white-space:pre;font-size:16px;line-height:24px;padding:7px;margin:5px 0 8px}.course-progress label{margin-top:8px}.course-progress .cp-status{margin-top:5px;min-height:40px}.course-stamp{font-size:12px}
 </style>
 </head>
 <body>
@@ -365,7 +365,6 @@ function openDialog(title,side=false){
  else document.getElementById('dialogTitle').focus();
 }
 function slotTitle(key){const [date,pi]=key.split('|');return date+'・'+(PERIODS[+pi]?.[0]||'原節次');}
-function resizeCourseField(field){field.style.height='auto';field.style.height=Math.max(64,field.scrollHeight||0)+'px';}
 function renderSchedule(){
  let html='<thead><tr><th class="period">節次</th>'+DAYS.map((d,i)=>'<th>'+shortDate(dateFor(i))+'（'+d+'）</th>').join('')+'</tr></thead><tbody>';
  PERIODS.forEach((p,pi)=>{
@@ -375,7 +374,7 @@ function renderSchedule(){
    html+='<td class="cell '+(c?'class-cell':'empty-cell')+'" '+(c?'data-course-key="'+k+'"':'')+'>';
    if(c){
     const cp=courseProgress[k]||{status:'尚未'};
-    html+='<div class="class-title">'+esc(c.t)+'</div><div class="room">'+esc(c.r||'')+'</div><div class="course-progress"><label>課程進度狀態<select aria-label="'+esc(slotTitle(k)+' 課程進度狀態')+'" class="cp-status '+(cp.status==='完成'?'done-status':'not-started-status')+'"><option '+(cp.status==='尚未'?'selected':'')+'>尚未</option><option '+(cp.status==='完成'?'selected':'')+'>完成</option></select></label><label>上課進度<textarea rows="2" class="cp-lesson" placeholder="填寫上課進度">'+esc(cp.lesson||'')+'</textarea></label><label>作業<textarea rows="2" class="cp-homework" placeholder="填寫作業">'+esc(cp.homework||'')+'</textarea></label><label>下次小考<textarea rows="2" class="cp-quiz" placeholder="填寫下次小考範圍或日期">'+esc(cp.quiz||'')+'</textarea></label><div class="course-stamp">'+esc(cp.updated||'尚未紀錄')+'</div></div>';
+    html+='<div class="class-title">'+esc(c.t)+'</div><div class="room">'+esc(c.r||'')+'</div><div class="course-progress"><label>課程進度狀態<select aria-label="'+esc(slotTitle(k)+' 課程進度狀態')+'" class="cp-status '+(cp.status==='完成'?'done-status':'not-started-status')+'"><option '+(cp.status==='尚未'?'selected':'')+'>尚未</option><option '+(cp.status==='完成'?'selected':'')+'>完成</option></select></label><label>上課進度<textarea rows="1" wrap="off" class="cp-lesson" placeholder="填寫上課進度">'+esc(cp.lesson||'')+'</textarea></label><label>作業<textarea rows="1" wrap="off" class="cp-homework" placeholder="填寫作業">'+esc(cp.homework||'')+'</textarea></label><label>下次小考<textarea rows="1" wrap="off" class="cp-quiz" placeholder="填寫下次小考範圍或日期">'+esc(cp.quiz||'')+'</textarea></label><div class="course-stamp">'+esc(cp.updated||'尚未紀錄')+'</div></div>';
    }
    if(!c&&items.length){
     html+='<button class="slot-summary" data-open-slot="'+esc(k)+'"><strong>'+(summary.pending?'<span class="light red"></span>':'')+summary.label+'</strong>';
@@ -388,7 +387,7 @@ function renderSchedule(){
  document.getElementById('scheduleTable').innerHTML=html+'</tbody>';updateYearBanner();
  document.querySelectorAll('[data-open-slot]').forEach(button=>button.onclick=()=>openSlot(button.dataset.openSlot));
  document.querySelectorAll('[data-course-key]').forEach(td=>['cp-status','cp-lesson','cp-quiz','cp-homework'].forEach(cls=>{
-  const el=td.querySelector('.'+cls);if(cls!=='cp-status')resizeCourseField(el);el.addEventListener(cls==='cp-status'?'change':'input',()=>{if(cls!=='cp-status')resizeCourseField(el);saveCourseProgress(td);});
+  const el=td.querySelector('.'+cls);el.addEventListener(cls==='cp-status'?'change':'input',()=>saveCourseProgress(td));
  }));
 }
 function openSlot(key){
